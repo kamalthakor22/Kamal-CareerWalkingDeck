@@ -66,25 +66,25 @@
     width: 100%;
     margin: 20px 0;
   }
+  /* Circle container for the logo */
   .timeline-point {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s;
-    margin: 0 10px;
-  }
-  .timeline-point img {
     width: 60px;
     height: 60px;
-    border-radius: 120%;
-    object-fit: contain;
-    padding: 5px;
-    transition: transform 0.2s;
+    border-radius: 50%;
+    background-color: #222; /* keep subtle dark background */
+    display: flex;
+    align-items: center;   /* vertical centering */
+    justify-content: center; /* horizontal centering */
+    overflow: hidden;
+    margin: 0 auto; /* center the whole circle on timeline */
   }
-  .timeline-year {
+/* Logo inside the circle */
+.timeline-point img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain; /* keeps original aspect ratio */
+}
+    .timeline-year {
     font-size: 12px;
     color: #aaa;
     margin-top: 5px;
