@@ -75,20 +75,7 @@
   align-items: center;
   cursor: pointer;
 }
- .timeline-point::before {
-  content: "";
-  position: absolute;
-  top: 8px;                   /* small top offset so circle sits nicely */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #222;           /* circle background */
-  border: 2px solid #00bcd4;  /* visible circle border */
-  z-index: 0;
-  box-sizing: border-box;
-}
+
 /* Logo inside the circle */
 .timeline-point img {
   max-width: 70%;
@@ -108,11 +95,7 @@
     margin-top: 3px;
     transition: font-size 0.2s ease, color 0.2s ease;
   }
-    .timeline-year,
-.timeline-title {
-  position: relative;         /* normal flow under the reserved padding */
-  z-index: 2;
-}
+
   .timeline-point:hover .timeline-year,
   .timeline-point:hover .timeline-title {
     font-size: 16px;
@@ -155,11 +138,7 @@
     overflow-y: auto;
     overflow-x: hidden;
   }
-    .modal-content {
-  max-height: calc(100vh - 140px); /* keeps some top/bottom space */
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* smooth scrolling on mobile */
-}
+
   .modal-header {
     display: flex;
     justify-content: space-between;
