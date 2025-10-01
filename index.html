@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en" class="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kamal Thakor — Portfolio</title>
   <meta name="description" content="Portfolio & full CV for Kamal Thakor — Cybersecurity & Data Protection | Governance & Privacy | Solutions Architect | Senior Infrastructure Engineer | IT Consultant" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,13 +21,161 @@
       darkMode: 'class'
     }
   </script>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+
   <style>
     /* Smooth scroll */
     html { scroll-behavior: smooth; }
     /* Safe aspect for iframe on small screens */
     .cv-frame { height: 75vh; }
     @media (min-width: 768px) { .cv-frame { height: 85vh; } }
-  </style>
+
+  body {
+    margin: 0;
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+  }
+  h1 {
+    text-align: center;
+    color: #00bcd4;
+    margin: 20px 0;
+  }
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 40px 0;
+    width: 100%;
+  }
+  .timeline-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin: 20px 0;
+  }
+  .timeline-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 0 10px;
+  }
+  .timeline-point img {
+    width: 60px;
+    height: 60px;
+    border-radius: 120%;
+    object-fit: contain;
+    padding: 5px;
+    transition: transform 0.2s;
+  }
+  .timeline-year {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+    transition: font-size 0.2s ease, color 0.2s ease;
+  }
+  .timeline-title {
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin-top: 3px;
+    transition: font-size 0.2s ease, color 0.2s ease;
+  }
+  .timeline-point:hover .timeline-year,
+  .timeline-point:hover .timeline-title {
+    font-size: 16px;
+    color: #00bcd4;
+  }
+  .timeline-bar {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    height: 4px;
+    background: #444;
+    z-index: -1;
+    transition: width 1s ease;
+  }
+
+  /* Modal styling */
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
+  }
+  .modal-content {
+    background-color: #1e1e1e;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    max-width: 900px;
+    max-height: 80vh;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+  }
+  .modal-header h2 {
+    margin: 0;
+    color: #00bcd4;
+  }
+  .close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover {
+    color: #fff;
+  }
+  .modal-body {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .modal-body .modal-text {
+    width: 70%;
+    white-space: normal;
+    line-height: 1.5;
+  }
+  .modal-body .modal-logo img {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+</style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
   <!-- Header -->
@@ -81,46 +229,220 @@
 
   <!-- Professsional Experience -->
   <section id="experience" class="mx-auto max-w-7xl px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Experience Timeline</h2>
-    <div class="mt-6 space-y-6">
-      <!-- Role 1 -->
-      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Specialist Software Engineer — LTIMindtree (Canada)</h3>
-          <span class="text-xs opacity-70">2017–2025</span>
-        </div>
-        <ul class="mt-3 space-y-2 text-sm">
-          <li>End‑to‑end CTB/RTB delivery and Tier‑3 production support for multiple apps.</li>
-          <li>Upgrades & migrations: SQL/Oracle/Citrix/Office with zero downstream impact.</li>
-          <li>Support automation reduced manual effort 30–50% and improved SLA compliance.</li>
-          <li>Stack: C#, VB.NET, Power Automate, Power Apps, Dataverse, Azure, SQL Server, Oracle, REST APIs, Git.</li>
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Professional Experience Timeline</h2>
+    <div class="timeline-container">
+
+  <!-- First Row -->
+  <div class="timeline-row">
+    <div class="timeline-point" onclick="openModal('vivanka')">
+      <img src="images/vivanka-logo.png" alt="Vivanka Inc. Logo">
+      <div class="timeline-year">Apr. 2024 – Present</div>
+      <div class="timeline-title">Founder & Principal Consultant</div>
+      <div class="timeline-bar" style="width:100px;"></div>
+    </div>
+    <div class="timeline-point" onclick="openModal('dell')">
+      <img src="images/dell-logo.png" alt="Dell Technologies Logo">
+      <div class="timeline-year">Oct. 2018 – Apr. 2024</div>
+      <div class="timeline-title">Consultant Solutions Architect</div>
+      <div class="timeline-bar" style="width:90px;"></div>
+    </div>
+    <div class="timeline-point" onclick="openModal('emcME')">
+      <img src="images/emc-logo.png" alt="Dell EMC Middle East Logo">
+      <div class="timeline-year">Jul. 2013 – Oct. 2018</div>
+      <div class="timeline-title">Senior Advisor / Solutions Architect</div>
+      <div class="timeline-bar" style="width:80px;"></div>
+    </div>
+  </div>
+
+  <!-- Second Row -->
+  <div class="timeline-row">
+    <div class="timeline-point" onclick="openModal('emcSeniorImpl')">
+      <img src="images/emc-logo.png" alt="EMC Senior Implementation Logo">
+      <div class="timeline-year">Oct. 2010 – Jul. 2013</div>
+      <div class="timeline-title">Senior Implementation Delivery Specialist</div>
+      <div class="timeline-bar" style="width:70px;"></div>
+    </div>
+    <div class="timeline-point" onclick="openModal('emcIndia')">
+      <img src="images/emc-logo.png" alt="EMC India Logo">
+      <div class="timeline-year">Oct. 2007 – Oct. 2010</div>
+      <div class="timeline-title">Implementation Delivery Specialist</div>
+      <div class="timeline-bar" style="width:60px;"></div>
+    </div>
+    <div class="timeline-point" onclick="openModal('emcThailand')">
+      <img src="images/emc-logo.png" alt="EMC Thailand Logo">
+      <div class="timeline-year">Sep. 2006 – Oct. 2007</div>
+      <div class="timeline-title">Technical Consultant / Implementation Specialist</div>
+      <div class="timeline-bar" style="width:50px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modals -->
+<div id="vivanka" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Founder & Principal Consultant</h2>
+      <span class="close" onclick="closeModal('vivanka')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>Vivanka Inc., Toronto, Canada</strong></p>
+        <p>Apr. 2024 – Present</p>
+        <p>Provided consulting services to Canadian enterprises on modernizing backup and cyber recovery strategies. Delivered end-to-end architecture, migration, and implementation services while engaging with stakeholders to ensure business alignment.</p>
+        <ul>
+          <li>Led a 6 month engagement to migrate legacy NetWorker environment to latest version, modernizing backup infrastructure & improving recovery SLAs.</li>
+          <li>Designed and deployed PowerProtect Data Manager (PPDM) with Data Domain and cloud tier across primary and secondary sites, enabling cost optimized long-term retention.</li>
+          <li>Executed multiple PPDM + Data Domain projects, positioning Dell solutions for hybrid-cloud adoption with Azure cloud tier integration.</li>
+          <li>Pre-Sales Impact: Delivered architecture design sessions, conducted solution workshops, and influenced customer adoption of Dell Technologies by articulating both technical benefits and business value (compliance, cost efficiency, cyber resilience).</li>
         </ul>
       </div>
-      <!-- Role 2 -->
-      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Sr. Software Engineer — LTIMindtree (USA & Canada)</h3>
-          <span class="text-xs opacity-70">2016–2017</span>
-        </div>
-        <ul class="mt-3 space-y-2 text-sm">
-          <li>On‑site leadership for monitoring, migrations, and enhancements across portfolios.</li>
-          <li>Coordinated cross‑functional teams to ship stable deployments and upgrades.</li>
-        </ul>
-      </div>
-      <!-- Role 3 -->
-      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Software Engineer → Associate Software Engineer → Trainee — LTIMindtree (India)</h3>
-          <span class="text-xs opacity-70">2011–2016</span>
-        </div>
-        <ul class="mt-3 space-y-2 text-sm">
-          <li>Modernized legacy backends, automated reporting (500 hrs → 50 hrs).</li>
-          <li>Strengthened BAU support, incident resolution, and release management.</li>
-        </ul>
+      <div class="modal-logo">
+        <img src="images/vivanka-logo.png" alt="Vivanka Logo">
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
+<div id="dell" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Consultant Solutions Architect</h2>
+      <span class="close" onclick="closeModal('dell')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>Dell Technologies, Toronto, Ontario, Canada</strong></p>
+        <p>Oct. 2018 – Apr. 2024</p>
+        <p>As a Consultant Solutions Architect for Data Protection Systems (DPS) at Dell Technologies, I specialized in engaging with clients to understand their business challenges and craft customized data protection solutions. I provided deep technical expertise in Dell's backup and recovery products, including NetWorker, Data Domain, Avamar, PowerProtect Data Manager, and Cyber Recovery, with a focus on integrating enterprise hybrid cloud environments and ensuring compliance with security and governance frameworks.</p>
+        <ul>
+          <li>Served as a trusted technical advisor, guiding clients through data protection strategies and cyber recovery implementations to enhance resilience against cyber threats.</li>
+          <li>Led pre-sales engagements by demonstrating product capabilities, tailoring solutions to client needs, and advising on security best practices, improving customer adoption rates.</li>
+          <li>Initiated the integration of Generative AI-based solutions into data protection strategies, enhancing automation, threat detection, and predictive analytics for improved security and operational efficiency.</li>
+          <li>Delivered technical presentations and hands-on demonstrations showcasing Dell's data protection portfolio, helping customers optimize their disaster recovery and compliance strategies.</li>
+          <li>Developed and facilitated client workshops, design thinking sessions, and proof-of-concept implementations to illustrate real-world use cases and ensure solution alignment with business goals.</li>
+          <li>Provided technical consulting and support for hybrid and multi-cloud backup solutions, including integration with Microsoft Azure, AWS, and Google Cloud Platform, optimizing disaster recovery and cloud tiering strategies.</li>
+          <li>Influenced key stakeholders by translating complex technical concepts into business value, ensuring executive buy-in and successful adoption of data protection solutions.</li>
+          <li>Designed and implemented Veeam Backup & Replication with Dell EMC Data Domain as backend storage, ensuring efficient deduplication, compression, and secure long-term retention as well as providing implementation best practices.</li>
+          <li>Spearheaded cross-functional collaboration between sales, product teams, and customers to enhance solution positioning and increase market penetration.</li>
+          <li>Evangelized Dell Technologies' data protection solutions through webinars and industry events, positioning the company as a leader in enterprise data security and compliance.</li>
+        </ul>
+      </div>
+      <div class="modal-logo">
+        <img src="images/dell-logo.png" alt="Dell Logo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="emcME" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Senior Advisor / Senior Solutions Architect</h2>
+      <span class="close" onclick="closeModal('emcME')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>Dell EMC Middle East, Dubai, United Arab Emirates</strong></p>
+        <p>Jul. 2013 – Oct. 2018</p>
+        <p>As a Senior Advisor Solutions Architect for Data Protection Systems (DPS) at Dell EMC in the GCC region, I closely collaborated with clients to deliver tailored data protection solutions. My expertise covered EMC’s backup and recovery products, such as NetWorker, Data Domain, Avamar, Data Protection Advisor, Cristie BMR solutions, IDPA, and integration with Enterprise Hybrid Cloud. I also integrated third-party solutions, such as Commvault, Veeam, and IBM Spectrum Protect, while driving AI-focused initiatives to enhance automation, predictive analytics, and threat detection in data protection strategies.</p>
+        <ul>
+          <li>Delivered bespoke solutions for global accounts, optimizing data protection strategies and driving significant business value through tailored implementations.</li>
+          <li>Initiated and led AI-focused training programs, promoting the integration of AI technologies into the design and implementation of data protection solutions, enhancing operational efficiency, security, and proactive risk management.</li>
+          <li>Played a vital role in supporting sales efforts by leveraging technical expertise to strengthen client relationships and drive revenue growth.</li>
+          <li>Conducted proof-of-concept (PoC) initiatives, demonstrating the capabilities of EMC Backup and Recovery solutions, and incorporating AI for enhanced automation, predictive maintenance, and threat detection.</li>
+          <li>Mentored colleagues and new hires, fostering a collaborative team environment and contributing to their professional success by introducing AI-driven methodologies for data protection and recovery, resulting in more efficient implementations.</li>
+          <li>Demonstrated proactive problem-solving capabilities, swiftly resolving escalations with minimal disruption to clients, leveraging AI-based solutions to improve response times and problem resolution.</li>
+          <li>Hands-on experience with Cohesity DataProtect, including protection policy configuration, VMware/SQL/NAS integrations, and recovery workflows, developed through small projects, lab work and client solution design exposure.</li>
+          <li>Awarded Solution Architect of the Year for Gulf and Pakistan in 2014, highlighting excellence in delivering innovative solutions and exceptional client service.</li>
+          <li>Successfully designed and implemented backup and recovery solutions for large enterprise clients in the GCC region, ensuring compliance with data protection regulations and enabling business continuity.</li>
+          <li>Led end-to-end project delivery, ensuring seamless implementation and integration of EMC Backup and Recovery Portfolio solutions, while leveraging cloud technologies and hybrid architectures.</li>
+          <li>Spearheaded the integration of data protection solutions with Federation Enterprise Hybrid Cloud projects, enhancing scalability and flexibility.</li>
+          <li>Led the migration of on-premise applications to Google Cloud Platform (GCP), utilizing Compute Engine, Cloud Storage, and Cloud SQL, resulting in a 30% reduction in operational costs.</li>
+        </ul>
+      </div>
+      <div class="modal-logo">
+        <img src="images/emc-logo.png" alt="EMC Logo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional modals for Senior Implementation Delivery, EMC India, and EMC Thailand would follow the same pattern -->
+<!-- EMC Senior Implementation Delivery Modal -->
+<div id="emcSeniorImpl" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Senior Implementation Delivery Specialist</h2>
+      <span class="close" onclick="closeModal('emcSeniorImpl')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>EMC Middle East, Dubai, United Arab Emirates</strong></p>
+        <p>Oct. 2010 – Jul. 2013</p>
+        <p>As a Senior Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I provided implementation services for data protection solutions in the GCC region. My responsibilities included performing complex software implementations, managing delivery of services, and ensuring high customer satisfaction.</p>
+        <ul>
+          <li>Delivered implementation services for backup and recovery solutions to customers in the GCC region, ensuring adherence to specifications and design documents.</li>
+          <li>Managed implementation delivery of services to achieve high customer satisfaction.</li>
+          <li>Collaborated with EMC colleagues worldwide to resolve technical issues encountered during implementations.</li>
+          <li>Identified client needs, assessed risks, and recommended appropriate product offerings to meet objectives.</li>
+        </ul>
+      </div>
+      <div class="modal-logo">
+        <img src="images/emc-logo.png" alt="EMC Logo">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EMC India Modal -->
+<div id="emcIndia" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Implementation Delivery Specialist</h2>
+      <span class="close" onclick="closeModal('emcIndia')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>EMC Data Storage India Pvt. Ltd., New Delhi, India</strong></p>
+        <p>Oct. 2007 - Oct. 2010</p>
+        <p>As an Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I deployed backup and recovery solutions for customers in South Asia.</p>
+        <ul>
+          <li>Provided delivery services for backup and recovery solutions to customers in the South Asia region.</li>
+          <li>Implemented a combination of EMC products including NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase (BMR) solutions, EMC EmailXtender (SourceOne), and EMC DiskExtender.</li>
+        </ul>
+      </div>
+      <div class="modal-logo">
+        <img src="images/emc-logo.png" alt="EMC Logo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMC Thailand Modal -->
+<div id="emcThailand" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Technical Consultant / Implementation Specialist</h2>
+      <span class="close" onclick="closeModal('emcThailand')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-text">
+        <p><strong>EMC Thailand, Bangkok, Thailand</strong></p>
+        <p>Sep. 2006 – Oct. 2007</p>
+        <p>As a Technical Consultant and Implementation Specialist for Backup and Recovery solutions at EMC, I provided technical consultancy and delivered information protection solutions to clients in the APJ region.</p>
+        <ul>
+          <li>Implemented NetWorker at various organizations including PTT Thai Oil Public Co. Ltd, Ministry of External Affairs (Bangkok), DTAC, True Move, Siam Pharmaceuticals, and Mitsubishi Motors Ltd.</li>
+          <li>Implemented DiskXtender for UNIX/Linux at BAAC.</li>
+          <li>Developed Java code for file permissions settings before archiving using DiskXtender for a customer in Malaysia.</li>
+        </ul>
+      </div>
+      <div class="modal-logo">
+        <img src="images/emc-logo.png" alt="EMC Logo">
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
   <!-- Core Competencies -->
   <section id="competencies" class="mx-auto max-w-7xl px-4 py-10">
     <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Selected Projects</h2>
