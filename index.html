@@ -66,16 +66,12 @@
     width: 100%;
     margin: 20px 0;
   }
-  .timeline-point {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s;
-    margin: 0 10px;
-  }
+.timeline-point {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
   .timeline-point img {
     width: 60px;
     height: 60px;
@@ -102,15 +98,18 @@
     font-size: 16px;
     color: #00bcd4;
   }
-  .timeline-bar {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    height: 4px;
-    background: #444;
-    z-index: -1;
-    transition: width 1s ease;
-  }
+.timeline-bar {
+  position: absolute;
+  top: 50%;                  /* vertically center relative to logo */
+  left: 50%;                 /* horizontally center relative to logo */
+  transform: translate(-50%, -50%); /* center the bar exactly */
+  height: 4px;
+  background: #444;
+  z-index: -1;
+  width: 100px;              /* adjust as needed for each point */
+  transition: width 1s ease;
+  border-radius: 2px;
+}
 
   /* Modal styling */
   .modal {
@@ -281,7 +280,7 @@
 <div id="vivanka" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Founder & Principal Consultant</h2>
+      <h1>Founder & Principal Consultant</h1>
       <span class="close" onclick="closeModal('vivanka')">&times;</span>
     </div>
     <div class="modal-body">
