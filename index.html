@@ -207,8 +207,8 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="about" class="mx-auto max-w-7xl px-4 py-10 grid md:grid-cols-12 gap-6 items-center">
+  <!-- Summary -->
+  <section id="summary" class="mx-auto max-w-7xl px-4 py-10 grid md:grid-cols-12 gap-6 items-center">
     <div class="md:col-span-7">
       <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Kamal Thakor</h1>
       <p class="mt-3 text-lg opacity-90">Cybersecurity & Data Protection • Governance & Privacy • Solutions Architect • Senior Infrastructure Engineer • IT Consultant • Pre-Sales Consultant • Practice Lead • Cloud Migrations</p>
@@ -522,22 +522,27 @@
   </div>
 </section>
 
+  <!-- Education -->
+<section id="education" class="mx-auto max-w-7xl px-4 py-10">
+  <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Educational Qualifications</h2>
+  <div class="mt-6 grid sm:grid-cols-1 md:grid-cols-2 gap-5">
 
-  <!-- Awards Carousel -->
-  <section id="achievements" class="mx-auto max-w-7xl px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Acheivements & Recognition</h2>
-    <div class="mt-6 flex items-center gap-3">
-      <button id="aw-prev" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Prev</button>
-      <a id="aw-card" href="#" target="_blank" rel="noreferrer" class="flex-1">
-        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6 text-center">
-          <div id="aw-year" class="text-sm opacity-70">—</div>
-          <div id="aw-name" class="text-xl font-semibold mt-1">—</div>
-          <div class="text-xs opacity-70 mt-2">Click to view proof on LinkedIn</div>
-        </div>
-      </a>
-      <button id="aw-next" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Next</button>
+    <!-- Education 1 -->
+    <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+      <h4 class="font-semibold">Master of Science in Computer Science</h4>
+      <p class="mt-1 text-sm opacity-90">Asian Institute of Technology, Bangkok, Thailand | 2003 - 2005</p>
     </div>
-  </section>
+
+    <!-- Education 2 -->
+    <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+      <h4 class="font-semibold">Bachelor of Science in Computer Science</h4>
+      <p class="mt-1 text-sm opacity-90">Assumption University, Bangkok, Thailand | 1996 - 2001</p>
+      <ul class="mt-2 list-disc pl-5 text-sm opacity-90">
+        <li>Computer Science Student of the Year - 1996</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
   <!-- Certifications -->
   <section id="certs" class="mx-auto max-w-7xl px-4 py-10">
@@ -582,8 +587,24 @@
     </div>
   </section>
 
+    <!-- Achievements Carousel -->
+  <section id="achievements" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Acheivements & Recognition</h2>
+    <div class="mt-6 flex items-center gap-3">
+      <button id="aw-prev" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Prev</button>
+      <a id="aw-card" href="#" target="_blank" rel="noreferrer" class="flex-1">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6 text-center">
+          <div id="aw-year" class="text-sm opacity-70">—</div>
+          <div id="aw-name" class="text-xl font-semibold mt-1">—</div>
+          <div class="text-xs opacity-70 mt-2">Click to view proof on LinkedIn</div>
+        </div>
+      </a>
+      <button id="aw-next" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Next</button>
+    </div>
+  </section>
+
   <!-- Skills -->
-  <section id="skills" class="mx-auto max-w-7xl px-4 py-10">
+<!--  <section id="skills" class="mx-auto max-w-7xl px-4 py-10">
     <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Skills (filterable)</h2>
     <div class="flex items-center gap-3 mb-4 mt-6">
       <input id="skillq" class="w-full md:w-80 px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70 bg-white/80 dark:bg-slate-900/60" placeholder="Type to filter… (e.g., power, sql, azure)" />
@@ -591,10 +612,10 @@
     </div>
     <div id="skilltags" class="flex flex-wrap gap-2 text-sm"></div>
   </section>
-
+-->
   <!-- Full CV -->
   <section id="fullcv" class="mx-auto max-w-7xl px-4 py-10">
-    <h2 class="text-2xl md:text-3xl font-bold tracking-tight"></h2>
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Full CV in PDF</h2>
     <div class="mt-4 rounded-2xl overflow-hidden border border-slate-200/70 dark:border-slate-800/70">
       <!-- IMPORTANT: Place your files at /cv/ :
            cv/Maulik Shah-Detailed-CV.htm
@@ -613,12 +634,12 @@
       <div class="flex flex-col md:flex-row md:items-center gap-4">
         <div class="grow">
           <h4 class="font-semibold">Let’s talk</h4>
-          <p class="opacity-80 text-sm mt-1">About me & what I’m looking for:
-💼 Roles: Principal Solutions Architect, Data Protection Consultant, Senior Systems Engineer, IT Consultant, Backup Architect, Technical Support Engineer, Resilience Engineer, Pre-Sales Consultant, IT Manager, 
- 🌎 Location: Greater Toronto Area / Canada / Toronto (open to hybrid/remote)
- ⭐ Experience: 17+ years at Dell Technologies, delivering enterprise data protection, cloud, and backup/recovery solutions globally.
-I’m ready to bring my expertise immediately and make a real impact. Any leads, introductions, or advice would mean a lot.
-hashtag#OpenToWork hashtag#SolutionsArchitect hashtag#DataProtection hashtag#Cloud hashtag#BackupRecovery hashtag#Hiring hashtag#Compliance hashtag#Resilience</p>
+          <p class="opacity-80 text-sm mt-1">About me & what I’m looking for:</p>
+<p> 💼 Roles: Principal Solutions Architect, Data Protection Consultant, Senior Systems Engineer, IT Consultant, Backup Architect, Technical Support Engineer, Resilience Engineer, Pre-Sales Consultant, IT Manager</p>
+<p> 🌎 Location: Greater Toronto Area / Canada / Toronto (open to hybrid/remote)</p>
+<p> ⭐ Experience: 17+ years at Dell Technologies, delivering enterprise data protection, cloud, and backup/recovery solutions globally.</p>
+<p>I’m ready to bring my expertise immediately and make a real impact. Any leads, introductions, or advice would mean a lot.</p>
+<p>hashtag#OpenToWork hashtag#SolutionsArchitect hashtag#DataProtection hashtag#Cloud hashtag#BackupRecovery hashtag#Hiring hashtag#Compliance hashtag#Resilience</p>
         </div>
         <div class="flex gap-3">
           <a href="mailto:kamalt@rocketmail.com" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">Email</a>
