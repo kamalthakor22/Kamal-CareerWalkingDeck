@@ -9,145 +9,166 @@
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #121212;
-    color: #e0e0e0;
+    color: #fff;
     overflow-x: hidden;
   }
+
   h1 {
     text-align: center;
     color: #00bcd4;
-    margin: 20px 0;
+    margin-top: 20px;
   }
+
   .timeline-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 2000px;
-    margin: 0 auto;
-    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    gap: 80px 40px;
   }
-  .timeline-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    margin: 40px 0;
-  }
-  .timeline-bar {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: #333;
-    z-index: 1;
-  }
+
   .timeline-experience {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
     z-index: 2;
-    transition: transform 0.3s;
+    width: 120px;
   }
+
+  .experience-bar {
+    position: absolute;
+    bottom: 30px; /* behind logo and year */
+    left: 0;
+    height: 6px;
+    width: 0;
+    background: #00bcd4;
+    border-radius: 3px;
+    z-index: 0;
+    animation: expandBar 1s forwards;
+  }
+
+  @keyframes expandBar {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
   .timeline-experience img {
+    position: relative;
+    z-index: 1;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     margin-bottom: 5px;
-    transition: transform 0.3s;
     border: 2px solid #00bcd4;
-    background: #222;
+    background-color: #222;
+    object-fit: contain;
+    padding: 5px;
+    transition: transform 0.3s;
   }
+
   .timeline-experience:hover img {
     transform: scale(1.1);
   }
+
   .timeline-year {
     font-size: 0.8rem;
-    color: #b0b0b0;
+    margin-top: 5px;
     text-align: center;
   }
-  /* Modal Styles */
+
+  /* Modal */
   .modal {
     display: none;
     position: fixed;
-    z-index: 100;
+    z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-    background-color: rgba(0,0,0,0.8);
-    animation: fadeIn 0.5s;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85);
   }
+
   .modal-content {
     background-color: #1e1e1e;
-    margin: 50px auto;
+    margin: 60px auto;
     padding: 20px;
-    border-radius: 10px;
-    width: 90%;
+    border-radius: 8px;
+    width: 80%;
     max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    color: #e0e0e0;
+    animation: slideIn 0.5s ease-out;
+    position: relative;
+    color: #fff;
   }
+
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
   .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #111;
-    padding: 10px 15px;
-    border-radius: 8px 8px 0 0;
+    padding: 10px 20px;
+    border-radius: 6px 6px 0 0;
+    margin: -20px -20px 10px -20px;
   }
+
   .modal-header h2 {
-    margin: 0;
     color: #00bcd4;
+    margin: 0;
+    font-size: 1.5rem;
   }
-  .close-btn {
-    color: #bbb;
-    font-size: 1.2rem;
+
+  .close {
+    color: #ccc;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
   }
+
   .modal-body {
     display: flex;
-    margin-top: 15px;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 20px;
   }
-  .modal-details {
-    flex: 2;
-    padding-right: 15px;
-  }
-  .modal-logo {
+
+  .modal-info {
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
   }
+
+  .modal-info p {
+    margin: 5px 0;
+  }
+
+  .modal-logo {
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
   .modal-logo img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-    border: 2px solid #00bcd4;
+    max-width: 150px;
+    height: auto;
   }
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-  @media(max-width: 768px){
-    .timeline-row {
-      flex-wrap: wrap;
+
+  @media screen and (max-width: 768px) {
+    .timeline-container {
+      gap: 60px 20px;
+    }
+    .timeline-experience {
+      width: 100px;
     }
     .modal-body {
       flex-direction: column;
     }
     .modal-logo {
-      justify-content: center;
-      margin-top: 15px;
-    }
-    .modal-logo img {
-      width: 80px;
-      height: 80px;
+      align-self: center;
     }
   }
 </style>
@@ -157,62 +178,64 @@
 <h1>Professional Experience Timeline (2005–2025)</h1>
 
 <div class="timeline-container">
-
-  <!-- Top Row (latest experiences first) -->
-  <div class="timeline-row">
-    <div class="timeline-bar"></div>
-
-    <div class="timeline-experience" onclick="openModal('modal-vivanka')">
-      <img src="images/vivanka-logo.png" alt="Vivanka Inc.">
-      <div class="timeline-year">Apr 2024 – Present</div>
-    </div>
-
-    <div class="timeline-experience" onclick="openModal('modal-dell')">
-      <img src="images/dell-logo.png" alt="Dell Technologies">
-      <div class="timeline-year">Oct 2018 – Apr 2024</div>
-    </div>
-
-    <div class="timeline-experience" onclick="openModal('modal-dell-emc')">
-      <img src="images/emc-logo.png" alt="Dell EMC Middle East">
-      <div class="timeline-year">Jul 2013 – Oct 2018</div>
-    </div>
+  <!-- Vivanka -->
+  <div class="timeline-experience" onclick="openModal('modal-vivanka')">
+    <div class="experience-bar"></div>
+    <img src="images/vivanka-logo.png" alt="Vivanka Inc.">
+    <div class="timeline-year">Apr 2024 – Present</div>
   </div>
 
-  <!-- Bottom Row (earlier experiences) -->
-  <div class="timeline-row">
-    <div class="timeline-bar"></div>
+  <!-- Dell Technologies -->
+  <div class="timeline-experience" onclick="openModal('modal-dell')">
+    <div class="experience-bar"></div>
+    <img src="images/dell-logo.png" alt="Dell Technologies">
+    <div class="timeline-year">Oct 2018 – Apr 2024</div>
+  </div>
 
-    <div class="timeline-experience" onclick="openModal('modal-senior-impl')">
-      <img src="images/emc-logo.png" alt="EMC Middle East">
-      <div class="timeline-year">Oct 2010 – Jul 2013</div>
-    </div>
+  <!-- Dell EMC Middle East -->
+  <div class="timeline-experience" onclick="openModal('modal-emc-middle-east')">
+    <div class="experience-bar"></div>
+    <img src="images/emc-logo.png" alt="Dell EMC Middle East">
+    <div class="timeline-year">Jul 2013 – Oct 2018</div>
+  </div>
 
-    <div class="timeline-experience" onclick="openModal('modal-impl-india')">
-      <img src="images/emc-logo.png" alt="EMC India">
-      <div class="timeline-year">Oct 2007 – Oct 2010</div>
-    </div>
+  <!-- EMC Senior Implementation -->
+  <div class="timeline-experience" onclick="openModal('modal-emc-senior-impl')">
+    <div class="experience-bar"></div>
+    <img src="images/emc-logo.png" alt="Senior Implementation Delivery Specialist">
+    <div class="timeline-year">Oct 2010 – Jul 2013</div>
+  </div>
 
-    <div class="timeline-experience" onclick="openModal('modal-impl-thailand')">
-      <img src="images/emc-logo.png" alt="EMC Thailand">
-      <div class="timeline-year">Sept 2006 – Oct 2007</div>
-    </div>
+  <!-- EMC India -->
+  <div class="timeline-experience" onclick="openModal('modal-emc-india')">
+    <div class="experience-bar"></div>
+    <img src="images/emc-logo.png" alt="EMC India">
+    <div class="timeline-year">Oct 2007 – Oct 2010</div>
+  </div>
 
+  <!-- EMC Thailand -->
+  <div class="timeline-experience" onclick="openModal('modal-emc-thailand')">
+    <div class="experience-bar"></div>
+    <img src="images/emc-logo.png" alt="EMC Thailand">
+    <div class="timeline-year">Sept 2006 – Oct 2007</div>
   </div>
 </div>
 
 <!-- Modals -->
-<!-- Vivanka -->
+
+<!-- Vivanka Modal -->
 <div id="modal-vivanka" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h2>Founder & Principal Consultant</h2>
-      <span class="close-btn" onclick="closeModal('modal-vivanka')">&times;</span>
+      <span class="close" onclick="closeModal('modal-vivanka')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
+      <div class="modal-info">
         <p><strong>Vivanka Inc., Toronto, Canada</strong></p>
         <p>Apr 2024 – Present</p>
         <p>Provided consulting services to Canadian enterprises on modernizing backup and cyber recovery strategies. Delivered end-to-end architecture, migration, and implementation services while engaging with stakeholders to ensure business alignment.</p>
+        <p><strong>Key Engagements:</strong></p>
         <ul>
           <li>Led a 6 month engagement to migrate legacy NetWorker environment to latest version, modernizing backup infrastructure & improving recovery SLAs.</li>
           <li>Designed and deployed PowerProtect Data Manager (PPDM) with Data Domain and cloud tier across primary and secondary sites, enabling cost optimized long-term retention.</li>
@@ -227,18 +250,19 @@
   </div>
 </div>
 
-<!-- Dell Technologies -->
+<!-- Dell Technologies Modal -->
 <div id="modal-dell" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h2>Consultant Solutions Architect</h2>
-      <span class="close-btn" onclick="closeModal('modal-dell')">&times;</span>
+      <span class="close" onclick="closeModal('modal-dell')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
-        <p><strong>Dell Technologies, Toronto, Canada</strong></p>
+      <div class="modal-info">
+        <p><strong>Dell Technologies, , Toronto, Canada</strong>strong></p>
         <p>Oct 2018 – Apr 2024</p>
         <p>As a Consultant Solutions Architect for Data Protection Systems (DPS) at Dell Technologies, I specialized in engaging with clients to understand their business challenges and craft customized data protection solutions. I provided deep technical expertise in Dell's backup and recovery products, including NetWorker, Data Domain, Avamar, PowerProtect Data Manager, and Cyber Recovery, with a focus on integrating enterprise hybrid cloud environments and ensuring compliance with security and governance frameworks.</p>
+        <p><strong>Key Contributions:</strong></p>
         <ul>
           <li>Served as a trusted technical advisor, guiding clients through data protection strategies and cyber recovery implementations to enhance resilience against cyber threats.</li>
           <li>Led pre-sales engagements by demonstrating product capabilities, tailoring solutions to client needs, and advising on security best practices, improving customer adoption rates.</li>
@@ -259,18 +283,19 @@
   </div>
 </div>
 
-<!-- Dell EMC Middle East -->
-<div id="modal-dell-emc" class="modal">
+<!-- Dell EMC Middle East Modal -->
+<div id="modal-emc-middle-east" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Senior Advisor / Senior Solutions Architect</h2>
-      <span class="close-btn" onclick="closeModal('modal-dell-emc')">&times;</span>
+      <h2>Senior Advisor / Senior Solutions Architect - Dell EMC Middle East</h2>
+      <span class="close" onclick="closeModal('modal-emc-middle-east')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
-        <p><strong>Dell EMC Middle East, Dubai, UAE</strong></p>
+      <div class="modal-info">
+        <p><strong>Dell EMC Middle East, Dubai, United Arab Emirates</strong></p>
         <p>Jul 2013 – Oct 2018</p>
         <p>As a Senior Advisor Solutions Architect for Data Protection Systems (DPS) at Dell EMC in the GCC region, I closely collaborated with clients to deliver tailored data protection solutions. My expertise covered EMC’s backup and recovery products, such as NetWorker, Data Domain, Avamar, Data Protection Advisor, Cristie BMR solutions, IDPA, and integration with Enterprise Hybrid Cloud. I also integrated third-party solutions, such as Commvault, Veeam, and IBM Spectrum Protect, while driving AI-focused initiatives to enhance automation, predictive analytics, and threat detection in data protection strategies.</p>
+        <p><strong>Key Contributions:</strong></p>
         <ul>
           <li>Delivered bespoke solutions for global accounts, optimizing data protection strategies and driving significant business value through tailored implementations.</li>
           <li>Initiated and led AI-focused training programs, promoting the integration of AI technologies into the design and implementation of data protection solutions, enhancing operational efficiency, security, and proactive risk management.</li>
@@ -293,18 +318,19 @@
   </div>
 </div>
 
-<!-- Senior Implementation Delivery Specialist -->
-<div id="modal-senior-impl" class="modal">
+<!-- Senior Implementation Delivery Specialist - EMC Middle East -->
+<div id="modal-emc-senior-impl" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h2>Senior Implementation Delivery Specialist</h2>
-      <span class="close-btn" onclick="closeModal('modal-senior-impl')">&times;</span>
+      <span class="close" onclick="closeModal('modal-emc-senior-impl')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
-        <p><strong>EMC Middle East, Dubai, UAE</strong></p>
+      <div class="modal-info">
+        <p><strong>EMC Middle East, Dubai, United Arab Emirates</strong></p>
         <p>Oct 2010 – Jul 2013</p>
         <p>As a Senior Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I provided implementation services for data protection solutions in the GCC region. My responsibilities included performing complex software implementations, managing delivery of services, and ensuring high customer satisfaction.</p>
+        <p><strong>Key Contributions:</strong></p>
         <ul>
           <li>Delivered implementation services for backup and recovery solutions to customers in the GCC region, ensuring adherence to specifications and design documents.</li>
           <li>Managed implementation delivery of services to achieve high customer satisfaction.</li>
@@ -319,18 +345,19 @@
   </div>
 </div>
 
-<!-- Implementation Delivery Specialist India -->
-<div id="modal-impl-india" class="modal">
+<!-- Implementation Delivery Specialist - EMC India -->
+<div id="modal-emc-india" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h2>Implementation Delivery Specialist</h2>
-      <span class="close-btn" onclick="closeModal('modal-impl-india')">&times;</span>
+      <span class="close" onclick="closeModal('modal-emc-india')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
+      <div class="modal-info">
         <p><strong>EMC Data Storage India Pvt. Ltd., New Delhi, India</strong></p>
         <p>Oct 2007 – Oct 2010</p>
         <p>As an Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I deployed backup and recovery solutions for customers in South Asia.</p>
+        <p><strong>Key Contributions:</strong></p>
         <ul>
           <li>Provided delivery services for backup and recovery solutions to customers in the South Asia region.</li>
           <li>Implemented a combination of EMC products including NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase (BMR) solutions, EMC EmailXtender (SourceOne), and EMC DiskExtender.</li>
@@ -343,18 +370,19 @@
   </div>
 </div>
 
-<!-- Technical Consultant / Implementation Specialist -->
-<div id="modal-impl-thailand" class="modal">
+<!-- Technical Consultant / Implementation Specialist - EMC Thailand -->
+<div id="modal-emc-thailand" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Technical Consultant / Implementation Specialist</h2>
-      <span class="close-btn" onclick="closeModal('modal-impl-thailand')">&times;</span>
+      <h2>Technical Consultant / Implementation Specialist - EMC Thailand</h2>
+      <span class="close" onclick="closeModal('modal-emc-thailand')">&times;</span>
     </div>
     <div class="modal-body">
-      <div class="modal-details">
+      <div class="modal-info">
         <p><strong>EMC Thailand, Bangkok, Thailand</strong></p>
         <p>Sept 2006 – Oct 2007</p>
         <p>As a Technical Consultant and Implementation Specialist for Backup and Recovery solutions at EMC, I provided technical consultancy and delivered information protection solutions to clients in the APJ region.</p>
+        <p><strong>Key Projects:</strong></p>
         <ul>
           <li>Implemented NetWorker at various organizations including PTT Thai Oil Public Co. Ltd, Ministry of External Affairs (Bangkok), DTAC, True Move, Siam Pharmaceuticals, and Mitsubishi Motors Ltd.</li>
           <li>Implemented DiskXtender for UNIX/Linux at BAAC.</li>
@@ -369,17 +397,17 @@
 </div>
 
 <script>
-function openModal(id){
+function openModal(id) {
   document.getElementById(id).style.display = 'block';
 }
-function closeModal(id){
+function closeModal(id) {
   document.getElementById(id).style.display = 'none';
 }
 window.onclick = function(event) {
   const modals = document.querySelectorAll('.modal');
   modals.forEach(modal => {
-    if(event.target == modal){
-      modal.style.display = 'none';
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
   });
 }
