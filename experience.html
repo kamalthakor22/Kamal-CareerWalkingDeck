@@ -1,228 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Experience Timeline</title>
-<style>
-  body { background-color:#1e1e1e; color:#fff; font-family:Arial,sans-serif; margin:0; font-size:14px; }
-  h1 { text-align:center; padding:15px 0; color:#ffcc00; font-size:1.5rem; }
-  .legend { display:flex; justify-content:center; gap:15px; margin-bottom:10px; flex-wrap:wrap; font-size:0.9rem; }
-  .color-box { width:12px; height:12px; display:inline-block; margin-right:5px; vertical-align:middle; }
-  #yearOverview { display:flex; justify-content:center; flex-wrap:wrap; padding:5px; background:#2c2c2c; white-space:nowrap; overflow:hidden; font-size:0.8rem; }
-  .year-label { padding:3px 6px; cursor:pointer; border-radius:4px; user-select:none; margin:1px; }
-  .year-label.active { background:#ffcc00; color:#000; }
-  #timelineContainer { position:relative; width:100%; padding:10px 5px; overflow-x:hidden; }
-  #timeline { position:relative; height:180px; display:flex; flex-wrap:nowrap; align-items:flex-start; width:100%; }
-  .experience-point { position:absolute; top:50px; display:flex; flex-direction:column; align-items:center; transition:transform 0.3s; }
-  .experience-point img { width:40px; height:40px; border-radius:50%; cursor:pointer; transition:transform 0.3s; }
-  .experience-bar { height:8px; border-radius:4px; margin-top:4px; transition:width 0.6s, opacity 0.6s; }
-  .popup { display:none; position:absolute; top:100px; left:50%; transform:translateX(-50%); background:#333; padding:20px; border-radius:10px; width:500px; max-width:90vw; max-height:60vh; overflow-y:auto; z-index:10; box-shadow:0 0 15px rgba(0,0,0,0.8); font-size:0.85rem; }
-  .popup.active { display:block; }
-  svg#connectors { position:absolute; top:0; left:0; width:100%; height:180px; pointer-events:none; overflow:visible; }
-  @media (max-width:600px){
-    body { font-size:12px; }
-    h1 { font-size:1.2rem; }
-    .popup { width:300px; max-height:50vh; padding:15px; font-size:0.8rem; }
-    .experience-point img{width:30px;height:30px;}
-    .experience-bar{height:6px;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Experience Timeline (2005–2025)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      margin: 40px auto;
+      width: 90%;
+      max-width: 1400px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #444;
+      z-index: 0;
+    }
+
+    .experience {
+      position: relative;
+      flex: 1 1 15%;
+      min-width: 120px;
+      margin: 20px 0;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      background: #00bcd4;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .experience:hover .dot {
+      transform: scale(1.3);
+      background: #03e9f4;
+    }
+
+    .bar {
+      width: 100%;
+      height: 8px;
+      margin: 10px 0;
+      background: #00bcd4;
+      border-radius: 4px;
+    }
+
+    .title {
+      font-size: 0.9rem;
+      margin-top: 5px;
+      font-weight: 600;
+      color: #f5f5f5;
+    }
+
+    .date {
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 18, 18, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: flex;
+      animation: glideIn 0.4s ease forwards;
+    }
+
+    @keyframes glideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 30px;
+      width: 80%;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+      color: #e0e0e0;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #00bcd4;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 1.8rem;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
+  <h1>Professional Experience Timeline (2005–2025)</h1>
 
-<h1>Professional Experience Timeline (2005–2025)</h1>
+  <div class="timeline">
+    <!-- Founder -->
+    <div class="experience" data-role="founder">
+      <div class="dot"></div>
+      <div class="bar"></div>
+      <div class="title">Founder & Principal Consultant</div>
+      <div class="date">2021–Present</div>
+    </div>
 
-<div class="legend">
-  <span><span class="color-box" style="background-color:#ff5733;"></span> Implementation</span>
-  <span><span class="color-box" style="background-color:#33ff57;"></span> Architect</span>
-  <span><span class="color-box" style="background-color:#3357ff;"></span> Founder</span>
-</div>
+    <!-- Consultant -->
+    <div class="experience" data-role="consultant">
+      <div class="dot"></div>
+      <div class="bar"></div>
+      <div class="title">Consultant Solutions Architect</div>
+      <div class="date">2017–2021</div>
+    </div>
 
-<div id="yearOverview"></div>
+    <!-- Senior Impl -->
+    <div class="experience" data-role="senior">
+      <div class="dot"></div>
+      <div class="bar"></div>
+      <div class="title">Sr. Implementation Delivery Specialist</div>
+      <div class="date">2012–2017</div>
+    </div>
 
-<div id="timelineContainer">
-  <div id="timeline"></div>
-  <svg id="connectors"></svg>
-</div>
+    <!-- Impl -->
+    <div class="experience" data-role="impl">
+      <div class="dot"></div>
+      <div class="bar"></div>
+      <div class="title">Implementation Delivery Specialist</div>
+      <div class="date">2008–2012</div>
+    </div>
 
-<script>
-const experiences = [
-  { 
-    title: "Technical Consultant / Implementation Specialist", 
-    company: "EMC Thailand", 
-    startYear: 2006, 
-    endYear: 2007, 
-    roleType: "Implementation", 
-    logo: "images/emc-logo.png", 
-    details: `<p>As a Technical Consultant and Implementation Specialist for Backup and Recovery solutions at EMC, I provided technical consultancy and delivered information protection solutions to clients in the APJ region.</p>
-    <strong>Key Projects:</strong>
-    <ul>
-      <li>Implemented NetWorker at various organizations including PTT Thai Oil Public Co. Ltd, Ministry of External Affairs (Bangkok), DTAC, True Move, Siam Pharmaceuticals, and Mitsubishi Motors Ltd.</li>
-      <li>Implemented DiskXtender for UNIX/Linux at BAAC.</li>
-      <li>Developed Java code for file permissions settings before archiving using DiskXtender for a customer in Malaysia.</li>
-    </ul>` 
-  },
-  { 
-    title: "Implementation Delivery Specialist", 
-    company: "EMC Data Storage India Pvt. Ltd.", 
-    startYear: 2007, 
-    endYear: 2010, 
-    roleType: "Implementation", 
-    logo: "images/emc-logo.png", 
-    details: `<p>As an Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I deployed backup and recovery solutions for customers in South Asia.</p>
-    <strong>Key Contributions:</strong>
-    <ul>
-      <li>Provided delivery services for backup and recovery solutions to customers in the South Asia region.</li>
-      <li>Implemented a combination of EMC products including NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase (BMR) solutions, EMC EmailXtender (SourceOne), and EMC DiskExtender.</li>
-    </ul>` 
-  },
-  { 
-    title: "Senior Implementation Delivery Specialist", 
-    company: "EMC Middle East", 
-    startYear: 2010, 
-    endYear: 2013, 
-    roleType: "Implementation", 
-    logo: "images/emc-logo.png", 
-    details: `<p>As a Senior Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I provided implementation services for data protection solutions in the GCC region. My responsibilities included performing complex software implementations, managing delivery of services, and ensuring high customer satisfaction.</p>
-    <strong>Key Contributions:</strong>
-    <ul>
-      <li>Delivered implementation services for backup and recovery solutions to customers in the GCC region, ensuring adherence to specifications and design documents.</li>
-      <li>Managed implementation delivery of services to achieve high customer satisfaction.</li>
-      <li>Collaborated with EMC colleagues worldwide to resolve technical issues encountered during implementations.</li>
-      <li>Identified client needs, assessed risks, and recommended appropriate product offerings to meet objectives.</li>
-    </ul>` 
-  },
-  { 
-    title: "Senior Advisor / Senior Solutions Architect", 
-    company: "Dell EMC Middle East", 
-    startYear: 2013, 
-    endYear: 2018, 
-    roleType: "Architect", 
-    logo: "images/dell-logo.png", 
-    details: `<p>As a Senior Advisor Solutions Architect for Data Protection Systems (DPS) at Dell EMC in the GCC region, I closely collaborated with clients to deliver tailored data protection solutions. My expertise covered EMC’s backup and recovery products, such as NetWorker, Data Domain, Avamar, Data Protection Advisor, Cristie BMR solutions, IDPA, and integration with Enterprise Hybrid Cloud. I also integrated third-party solutions, such as Commvault, Veeam, and IBM Spectrum Protect, while driving AI-focused initiatives to enhance automation, predictive analytics, and threat detection in data protection strategies.</p>
-    <strong>Key Contributions:</strong>
-    <ul>
-      <li>Delivered bespoke solutions for global accounts, optimizing data protection strategies and driving significant business value through tailored implementations.</li>
-      <li>Initiated and led AI-focused training programs, promoting the integration of AI technologies into the design and implementation of data protection solutions, enhancing operational efficiency, security, and proactive risk management.</li>
-      <li>Played a vital role in supporting sales efforts by leveraging technical expertise to strengthen client relationships and drive revenue growth.</li>
-      <li>Conducted proof-of-concept (PoC) initiatives, demonstrating the capabilities of EMC Backup and Recovery solutions, and incorporating AI for enhanced automation, predictive maintenance, and threat detection.</li>
-      <li>Mentored colleagues and new hires, fostering a collaborative team environment and contributing to their professional success by introducing AI-driven methodologies for data protection and recovery, resulting in more efficient implementations.</li>
-      <li>Demonstrated proactive problem-solving capabilities, swiftly resolving escalations with minimal disruption to clients, leveraging AI-based solutions to improve response times and problem resolution.</li>
-      <li>Hands-on experience with Cohesity DataProtect, including protection policy configuration, VMware/SQL/NAS integrations, and recovery workflows, developed through small projects, lab work and client solution design exposure.</li>
-      <li>Awarded Solution Architect of the Year for Gulf and Pakistan in 2014, highlighting excellence in delivering innovative solutions and exceptional client service.</li>
-      <li>Successfully designed and implemented backup and recovery solutions for large enterprise clients in the GCC region, ensuring compliance with data protection regulations and enabling business continuity.</li>
-      <li>Led end-to-end project delivery, ensuring seamless implementation and integration of EMC Backup and Recovery Portfolio solutions, while leveraging cloud technologies and hybrid architectures.</li>
-      <li>Spearheaded the integration of data protection solutions with Federation Enterprise Hybrid Cloud projects, enhancing scalability and flexibility.</li>
-      <li>Led the migration of on-premise applications to Google Cloud Platform (GCP), utilizing Compute Engine, Cloud Storage, and Cloud SQL, resulting in a 30% reduction in operational costs.</li>
-    </ul>` 
-  },
-  { 
-    title: "Consultant Solutions Architect", 
-    company: "Dell Technologies", 
-    startYear: 2018, 
-    endYear: 2024, 
-    roleType: "Architect", 
-    logo: "images/dell-logo.png", 
-    details: `<p>As a Consultant Solutions Architect for Data Protection Systems (DPS) at Dell Technologies, I specialized in engaging with clients to understand their business challenges and craft customized data protection solutions. I provided deep technical expertise in Dell's backup and recovery products, including NetWorker, Data Domain, Avamar, PowerProtect Data Manager, and Cyber Recovery, with a focus on integrating enterprise hybrid cloud environments and ensuring compliance with security and governance frameworks.</p>
-    <strong>Key Contributions:</strong>
-    <ul>
-      <li>Served as a trusted technical advisor, guiding clients through data protection strategies and cyber recovery implementations to enhance resilience against cyber threats.</li>
-      <li>Led pre-sales engagements by demonstrating product capabilities, tailoring solutions to client needs, and advising on security best practices, improving customer adoption rates.</li>
-      <li>Initiated the integration of Generative AI-based solutions into data protection strategies, enhancing automation, threat detection, and predictive analytics for improved security and operational efficiency.</li>
-      <li>Delivered technical presentations and hands-on demonstrations showcasing Dell's data protection portfolio, helping customers optimize their disaster recovery and compliance strategies.</li>
-      <li>Developed and facilitated client workshops, design thinking sessions, and proof-of-concept implementations to illustrate real-world use cases and ensure solution alignment with business goals.</li>
-      <li>Provided technical consulting and support for hybrid and multi-cloud backup solutions, including integration with Microsoft Azure, AWS, and Google Cloud Platform, optimizing disaster recovery and cloud tiering strategies.</li>
-      <li>Influenced key stakeholders by translating complex technical concepts into business value, ensuring executive buy-in and successful adoption of data protection solutions.</li>
-      <li>Designed and implemented Veeam Backup & Replication with Dell EMC Data Domain as backend storage, ensuring efficient deduplication, compression, and secure long-term retention as well as providing implementation best practices.</li>
-      <li>Spearheaded cross-functional collaboration between sales, product teams, and customers to enhance solution positioning and increase market penetration.</li>
-      <li>Evangelized Dell Technologies' data protection solutions through webinars and industry events, positioning the company as a leader in enterprise data security and compliance.</li>
-    </ul>` 
-  },
-  { 
-    title: "Founder & Principal Consultant", 
-    company: "Vivanka Inc.", 
-    startYear: 2024, 
-    endYear: 2025, 
-    roleType: "Founder", 
-    logo: "images/vivanka-logo.png", 
-    details: `<p>Provided consulting services to Canadian enterprises on modernizing backup and cyber recovery strategies. Delivered end-to-end architecture, migration, and implementation services while engaging with stakeholders to ensure business alignment.</p>
-    <strong>Key Engagements:</strong>
-    <ul>
-      <li>Led a 6 month engagement to migrate legacy NetWorker environment to latest version, modernizing backup infrastructure & improving recovery SLAs.</li>
-      <li>Designed and deployed PowerProtect Data Manager (PPDM) with Data Domain and cloud tier across primary and secondary sites, enabling cost-optimized long-term retention.</li>
-      <li>Executed multiple PPDM + Data Domain projects, positioning Dell solutions for hybrid-cloud adoption with Azure cloud tier integration.</li>
-      <li>Pre-Sales Impact: Delivered architecture design sessions, conducted solution workshops, and influenced customer adoption of Dell Technologies by articulating both technical benefits and business value (compliance, cost efficiency, cyber resilience).</li>
-    </ul>` 
-  }
-];
+    <!-- Oracle -->
+    <div class="experience" data-role="oracle">
+      <div class="dot"></div>
+      <div class="bar"></div>
+      <div class="title">Oracle DBA</div>
+      <div class="date">2005–2008</div>
+    </div>
+  </div>
 
-// Auto-calculate timeline width to fit container without scrollbars
-(function(){
-  const timelineContainer = document.getElementById('timelineContainer');
-  const timeline = document.getElementById('timeline');
-  const yearOverview = document.getElementById('yearOverview');
+  <!-- Modals -->
+  <div class="modal" id="founder">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Founder & Principal Consultant (2021–Present)</h2>
+      <p>As Founder & Principal Consultant at Datalink Systems, I established a specialized consultancy providing tailored solutions in data protection, cybersecurity, and cloud resilience...</p>
+      <ul>
+        <li>Founded consultancy delivering data protection and cloud solutions.</li>
+        <li>Advised enterprises on data security, compliance, and recovery.</li>
+        <li>Implemented hybrid/multi-cloud architectures with Azure & AWS.</li>
+        <li>Designed customized cyber recovery frameworks for critical workloads.</li>
+      </ul>
+    </div>
+  </div>
 
-  const startYear = 2005;
-  const endYear = 2025;
-  const containerWidth = timelineContainer.offsetWidth;
-  const totalYears = endYear - startYear + 1;
-  const pixelPerYear = containerWidth / totalYears;
+  <div class="modal" id="consultant">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Consultant Solutions Architect (2017–2021)</h2>
+      <p>As a Consultant Solutions Architect for Data Protection Systems (DPS) at Dell Technologies, I specialized in engaging with clients to understand their business challenges and craft customized data protection solutions...</p>
+      <ul>
+        <li>Served as a trusted advisor for cyber recovery implementations.</li>
+        <li>Led pre-sales engagements, workshops, and solution demos.</li>
+        <li>Integrated Generative AI into data protection strategies.</li>
+        <li>Delivered hybrid and multi-cloud backup solutions (Azure, AWS, GCP).</li>
+        <li>Designed and implemented Veeam + Data Domain architectures.</li>
+      </ul>
+    </div>
+  </div>
 
-  // Year overview labels
-  for(let y=startYear;y<=endYear;y++){
-    const yLabel = document.createElement('div');
-    yLabel.classList.add('year-label');
-    yLabel.textContent = y;
-    yLabel.dataset.year = y;
-    yearOverview.appendChild(yLabel);
-    yLabel.addEventListener('click', ()=> openYear(y));
-  }
+  <div class="modal" id="senior">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Senior Implementation Delivery Specialist (2012–2017)</h2>
+      <p>As a Senior Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I provided implementation services for data protection solutions in the GCC region...</p>
+      <ul>
+        <li>Delivered data protection implementations across GCC clients.</li>
+        <li>Collaborated globally with EMC colleagues to resolve issues.</li>
+        <li>Assessed risks and aligned product offerings with client needs.</li>
+      </ul>
+    </div>
+  </div>
 
-  // Timeline points
-  experiences.forEach((exp, index)=>{
-    const point = document.createElement('div');
-    point.classList.add('experience-point');
-    point.style.left = ((exp.startYear-startYear)*pixelPerYear)+'px';
-    point.dataset.index = index;
+  <div class="modal" id="impl">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Implementation Delivery Specialist (2008–2012)</h2>
+      <p>As an Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I deployed backup and recovery solutions for customers in South Asia...</p>
+      <ul>
+        <li>Provided delivery services across South Asia.</li>
+        <li>Implemented NetWorker, Data Domain, Avamar, DPA, Homebase, etc.</li>
+        <li>Delivered EMC EmailXtender and DiskExtender solutions.</li>
+      </ul>
+    </div>
+  </div>
 
-    const img = document.createElement('img');
-    img.src = exp.logo;
-    img.title = exp.company;
-    point.appendChild(img);
+  <div class="modal" id="oracle">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Oracle DBA (2005–2008)</h2>
+      <p>As an Oracle DBA, I managed, optimized, and supported enterprise Oracle databases for high-availability environments...</p>
+      <ul>
+        <li>Performed database administration, backup, and recovery.</li>
+        <li>Ensured performance tuning and security compliance.</li>
+        <li>Collaborated with development teams for database integration.</li>
+      </ul>
+    </div>
+  </div>
 
-    const bar = document.createElement('div');
-    bar.classList.add('experience-bar');
-    bar.style.width = ((exp.endYear-exp.startYear+1)*pixelPerYear)+'px';
-    bar.style.background = exp.roleType==="Implementation" ? "#ff5733" : exp.roleType==="Architect" ? "#33ff57" : "#3357ff";
-    point.appendChild(bar);
+  <script>
+    const experiences = document.querySelectorAll('.experience');
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.close-btn');
 
-    const popup = document.createElement('div');
-    popup.classList.add('popup');
-    popup.innerHTML = `<h3>${exp.title} - ${exp.company}</h3>${exp.details}`;
-    point.appendChild(popup);
-
-    img.addEventListener('click', ()=>{
-      document.querySelectorAll('.popup').forEach(p=>p.classList.remove('active'));
-      popup.classList.add('active');
-      // shrink other points
-      document.querySelectorAll('.experience-point').forEach(ep=>{
-        if(ep!==point) ep.style.transform='scale(0.7)';
-        else ep.style.transform='scale(1)';
+    experiences.forEach(exp => {
+      exp.addEventListener('click', () => {
+        const role = exp.getAttribute('data-role');
+        document.getElementById(role).classList.add('active');
       });
     });
 
-    timeline.appendChild(point);
-  });
-
-  function openYear(year){
-    experiences.forEach((exp, idx)=>{
-      if(exp.startYear <= year && exp.endYear >= year){
-        document.querySelectorAll('.experience-point img')[idx].click();
-      }
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.modal').classList.remove('active');
+      });
     });
-  }
-})();
-</script>
+
+    window.addEventListener('click', (e) => {
+      modals.forEach(modal => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
