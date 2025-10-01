@@ -54,7 +54,7 @@ h2 {
   cursor: pointer;
   font-size: 12px;
 }
-.year-overview button:hover {
+.year-overview button:hover, .year-overview button.active {
   background: #1e90ff;
   color: #fff;
 }
@@ -64,14 +64,15 @@ h2 {
   padding: 80px 0 80px 0;
   background: #1c1c1c;
   border-bottom: 3px solid #1e90ff;
-  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 .timeline-wrapper {
   position: relative;
   white-space: nowrap;
   height: 250px;
   transform-origin: left center;
+  transition: transform 0.3s ease;
 }
 .timeline-year {
   position: absolute;
@@ -100,7 +101,7 @@ h2 {
   position: absolute;
   cursor: pointer;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s, scale 0.3s;
 }
 .timeline-point img {
   width: 60px;
@@ -149,6 +150,7 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.7);
   z-index: 100;
   color: #e0e0e0;
+  transition: all 0.3s ease;
 }
 .popup h3 {
   margin: 0 0 5px 0;
@@ -214,19 +216,15 @@ const yearOverview = document.getElementById('yearOverview');
 const startYear = 2005;
 const endYear = 2025;
 
-const roleColors = {
-  "Founder": "#ff8c00",
-  "Architect": "#1e90ff",
-  "Implementation": "#32cd32"
-};
+const roleColors = { "Founder": "#ff8c00", "Architect": "#1e90ff", "Implementation": "#32cd32" };
 
 const experiences = [
-  { title: "Technical Consultant / Implementation Specialist", company: "EMC Thailand", startYear: 2006, endYear: 2007, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Provided technical consultancy and delivered solutions across APJ region.</li></ul>` },
-  { title: "Implementation Delivery Specialist", company: "EMC India", startYear: 2007, endYear: 2010, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Deployed backup & recovery solutions in South Asia.</li></ul>` },
-  { title: "Senior Implementation Delivery Specialist", company: "EMC Middle East", startYear: 2010, endYear: 2013, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Implemented backup & recovery systems in GCC region.</li></ul>` },
-  { title: "Senior Advisor / Senior Solutions Architect", company: "Dell EMC Middle East", startYear: 2013, endYear: 2018, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Delivered tailored data protection solutions integrating AI.</li></ul>` },
-  { title: "Consultant Solutions Architect", company: "Dell Technologies", startYear: 2018, endYear: 2024, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Engaged clients for hybrid cloud integration and compliance.</li></ul>` },
-  { title: "Founder & Principal Consultant", company: "Vivanka Inc.", startYear: 2024, endYear: 2025, roleType: "Founder", logo: "images/vivanka-logo.png", details: `<ul><li>Consulting for Canadian enterprises on modernizing backup and cyber recovery.</li></ul>` }
+  { title: "Technical Consultant / Implementation Specialist", company: "EMC Thailand", startYear: 2006, endYear: 2007, roleType: "Implementation", logo: "emc-thailand-logo.png", details: `<ul><li>Provided technical consultancy and delivered solutions across APJ region.</li></ul>` },
+  { title: "Implementation Delivery Specialist", company: "EMC India", startYear: 2007, endYear: 2010, roleType: "Implementation", logo: "emc-india-logo.png", details: `<ul><li>Deployed backup & recovery solutions in South Asia.</li></ul>` },
+  { title: "Senior Implementation Delivery Specialist", company: "EMC Middle East", startYear: 2010, endYear: 2013, roleType: "Implementation", logo: "emc-logo.png", details: `<ul><li>Implemented backup & recovery systems in GCC region.</li></ul>` },
+  { title: "Senior Advisor / Senior Solutions Architect", company: "Dell EMC Middle East", startYear: 2013, endYear: 2018, roleType: "Architect", logo: "dell-emc-logo.png", details: `<ul><li>Delivered tailored data protection solutions integrating AI.</li></ul>` },
+  { title: "Consultant Solutions Architect", company: "Dell Technologies", startYear: 2018, endYear: 2024, roleType: "Architect", logo: "dell-logo.png", details: `<ul><li>Engaged clients for hybrid cloud integration and compliance.</li></ul>` },
+  { title: "Founder & Principal Consultant", company: "Vivanka Inc.", startYear: 2024, endYear: 2025, roleType: "Founder", logo: "vivanka-logo.png", details: `<ul><li>Consulting for Canadian enterprises on modernizing backup and cyber recovery.</li></ul>` }
 ];
 
 function yearToLeft(year) {
@@ -234,15 +232,12 @@ function yearToLeft(year) {
   return ((year - startYear) / (endYear - startYear)) * (containerWidth - 100) + 50;
 }
 
-// Create year overview buttons
+// Year overview buttons
 for (let y = startYear; y <= endYear; y++) {
   const btn = document.createElement('button');
   btn.innerText = y;
   btn.addEventListener('click', () => {
-    timelineContainer.scrollTo({
-      left: yearToLeft(y) - 50,
-      behavior: 'smooth'
-    });
+    timelineContainer.scrollTo({ left: yearToLeft(y) - 50, behavior: 'smooth' });
   });
   yearOverview.appendChild(btn);
 }
@@ -256,16 +251,15 @@ for (let y = startYear; y <= endYear; y++) {
   timelineWrapper.appendChild(yearDiv);
 }
 
-// Vertical offsets for overlapping
+// Vertical offsets
 const verticalOffsets = {};
 function getVerticalOffset(company) {
   verticalOffsets[company] = (verticalOffsets[company] || 0) + 1;
   return verticalOffsets[company] * 70;
 }
 
-// Store points for curved connectors
+// Store points for connectors
 const companyPoints = {};
-
 experiences.forEach(exp => {
   const left = yearToLeft(exp.startYear);
   const right = yearToLeft(exp.endYear);
@@ -273,23 +267,24 @@ experiences.forEach(exp => {
   const topOffset = getVerticalOffset(exp.company);
   const color = roleColors[exp.roleType] || "#1e90ff";
 
+  // Bar
   const bar = document.createElement('div');
   bar.className = 'duration-bar';
   bar.style.left = left + 'px';
   bar.style.width = width + 'px';
   bar.style.top = topOffset + 'px';
   bar.style.backgroundColor = color + "88";
-  bar.setAttribute('data-tooltip', `${exp.roleType}: ${exp.startYear} – ${exp.endYear}`);
   timelineWrapper.appendChild(bar);
 
+  // Point
   const point = document.createElement('div');
   point.className = 'timeline-point';
   point.style.left = left + 'px';
   point.style.top = (topOffset - 40) + 'px';
-  point.setAttribute('data-tooltip', `${exp.roleType}: ${exp.startYear} – ${exp.endYear}`);
   point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo" style="border-color:${color}"><span>${exp.company}</span>`;
   timelineWrapper.appendChild(point);
 
+  // Popup
   const popup = document.createElement('div');
   popup.className = 'popup';
   popup.style.display = 'none';
@@ -297,124 +292,4 @@ experiences.forEach(exp => {
   document.body.appendChild(popup);
 
   point.addEventListener('click', () => {
-    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-    const rect = point.getBoundingClientRect();
-    popup.style.left = rect.left + window.scrollX + 'px';
-    popup.style.top = rect.top + window.scrollY - popup.offsetHeight - 10 + 'px';
-    popup.scrollIntoView({behavior: 'smooth', block: 'center'});
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!point.contains(e.target) && !popup.contains(e.target)) {
-      popup.style.display = 'none';
-    }
-  });
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  observer.observe(bar);
-  observer.observe(point);
-
-  if (!companyPoints[exp.company]) companyPoints[exp.company] = [];
-  companyPoints[exp.company].push({ x: left + 30, y: topOffset, color });
-});
-
-// Draw curved connectors
-for (const company in companyPoints) {
-  const points = companyPoints[company];
-  if (points.length > 1) {
-    for (let i = 0; i < points.length - 1; i++) {
-      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
-      const start = points[i];
-      const end = points[i+1];
-      const dx = end.x - start.x;
-      const dy = end.y - start.y;
-      const curvature = Math.min(Math.abs(dy)/2, 40);
-      const d = `M ${start.x} ${start.y + 10} C ${start.x + dx/2} ${start.y + 10 - curvature}, ${start.x + dx/2} ${end.y + 10 - curvature}, ${end.x} ${end.y + 10}`;
-      path.setAttribute("d", d);
-      path.setAttribute("stroke", start.color);
-      path.setAttribute("stroke-width", 2);
-      path.setAttribute("fill", "none");
-      path.setAttribute("marker-end", "url(#arrowhead)");
-      connectorSvg.appendChild(path);
-    }
-  }
-}
-
-// Arrowhead definition
-const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
-const marker = document.createElementNS("http://www.w3.org/2000/svg","marker");
-marker.setAttribute("id","arrowhead");
-marker.setAttribute("markerWidth","10");
-marker.setAttribute("markerHeight","7");
-marker.setAttribute("refX","10");
-marker.setAttribute("refY","3.5");
-marker.setAttribute("orient","auto");
-const polygon = document.createElementNS("http://www.w3.org/2000/svg","polygon");
-polygon.setAttribute("points","0 0, 10 3.5, 0 7");
-polygon.setAttribute("fill","#1e90ff");
-marker.appendChild(polygon);
-defs.appendChild(marker);
-connectorSvg.appendChild(defs);
-
-// Zoom functionality
-let zoomLevel = 1;
-const minZoom = 0.5;
-const maxZoom = 2;
-
-// Desktop: Ctrl + wheel zoom
-timelineContainer.addEventListener('wheel', e => {
-  if (e.ctrlKey) {
-    e.preventDefault();
-    zoomLevel -= e.deltaY * 0.001;
-    zoomLevel = Math.min(Math.max(zoomLevel, minZoom), maxZoom);
-    timelineWrapper.style.transform = `scaleX(${zoomLevel})`;
-    connectorSvg.style.transform = `scaleX(${zoomLevel})`;
-    yearOverview.style.transform = `scaleX(${zoomLevel})`;
-    document.querySelectorAll('.timeline-year').forEach(y => y.style.transform = `scaleX(${1/zoomLevel})`);
-  }
-});
-
-// Mobile pinch-to-zoom
-let initialDistance = null;
-let initialZoom = zoomLevel;
-
-timelineContainer.addEventListener('touchstart', e => {
-  if (e.touches.length === 2) {
-    e.preventDefault();
-    const dx = e.touches[0].clientX - e.touches[1].clientX;
-    initialDistance = Math.abs(dx);
-    initialZoom = zoomLevel;
-  }
-}, {passive: false});
-
-timelineContainer.addEventListener('touchmove', e => {
-  if (e.touches.length === 2 && initialDistance) {
-    e.preventDefault();
-    const dx = e.touches[0].clientX - e.touches[1].clientX;
-    const currentDistance = Math.abs(dx);
-    const scaleChange = currentDistance / initialDistance;
-    zoomLevel = initialZoom * scaleChange;
-    zoomLevel = Math.min(Math.max(zoomLevel, minZoom), maxZoom);
-    timelineWrapper.style.transform = `scaleX(${zoomLevel})`;
-    connectorSvg.style.transform = `scaleX(${zoomLevel})`;
-    yearOverview.style.transform = `scaleX(${zoomLevel})`;
-    document.querySelectorAll('.timeline-year').forEach(y => y.style.transform = `scaleX(${1/zoomLevel})`);
-  }
-}, {passive: false});
-
-timelineContainer.addEventListener('touchend', e => {
-  if (e.touches.length < 2) {
-    initialDistance = null;
-  }
-});
-</script>
-</body>
-</html>
+    const allPoints = document.querySelector
