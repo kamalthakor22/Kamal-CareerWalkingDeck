@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kamal Thakor — Portfolio</title>
+  <meta name="description" content="Portfolio & full CV for Kamal Thakor — Cybersecurity & Data Protection | Governance & Privacy | Solutions Architect | Senior Infrastructure Engineer | IT Consultant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Tailwind (CDN) for zero-build deployment; fine for GitHub Pages -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Basic Tailwind config
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+    /* Safe aspect for iframe on small screens */
+    .cv-frame { height: 75vh; }
+    @media (min-width: 768px) { .cv-frame { height: 85vh; } }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur border-b border-slate-200/50 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/40">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
+      <span class="font-extrabold tracking-tight">Maulik Mukund Shah</span>
+      <nav class="hidden md:flex gap-3 ml-4 text-sm">
+        <a href="#about" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+        <a href="#experience" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+        <a href="#projects" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+        <a href="#awards" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Awards</a>
+        <a href="#certs" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Certifications</a>
+        <a href="#skills" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+        <a href="#fullcv" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Full CV</a>
+        <a href="#contact" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+      </nav>
+      <div class="ml-auto flex items-center gap-2">
+        <a href="https://www.linkedin.com/in/kamal-thakor/" target="_blank" rel="noreferrer" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow">LinkedIn</a>
+        <a href="mailto:kamalt@rocketmail.com" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow">Email</a>
+        <button id="dm" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow" aria-label="Toggle dark mode">Light</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="about" class="mx-auto max-w-7xl px-4 py-10 grid md:grid-cols-12 gap-6 items-center">
+    <div class="md:col-span-7">
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Kamal Thakor</h1>
+      <p class="mt-3 text-lg opacity-90">Cybersecurity & Data Protection • Governance & Privacy • Solutions Architect • Senior Infrastructure Engineer • IT Consultant • Pre-Sales Consultant • Practice Lead • Cloud Migrations</p>
+      <p class="mt-5 text-base opacity-90 max-w-3xl">• Accomplished Data Protection & Infrastructure Solutions Architect and seasoned IT Consultant with over 17 years of global consulting experience across APJ, EMEA, and the Americas 
+• Expertise in backup & recovery, security, compliance, infrastructure modernization, and cloud security.
+• Proven ability to design and implement enterprise data protection strategies, aligning IT transformation with business objectives while ensuring compliance with industry security standards (GDPR, CDPA, NIST, PSI DSS, ISO 27001). 
+• Adept at working with cross-functional teams, executive stakeholders, and technology partners to drive innovation, optimize operational efficiency, and enhance data security resilience.
+• Demonstrated proficiency in conceptualizing and executing large-scale IT transformation initiatives focused on enhancing data protection frameworks.
+• Demonstrated mastery of Dell Data Protection solutions including Avamar, NetWorker, Data Domain, Cyber Recovery, Power Protect Data Manager, and Integrated Data Protection Appliance, complemented by a comprehensive understanding of Non-Dell offerings such as IBM Spectrum Protect / Protect Plus, Commvault, Rubrik, Cohesity, NetBackup, and Veeam.
+• Possess extensive experience with Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform, particularly in integrating these platforms with Dell's Data Domain and backup products, including cloud tiering and cloud disaster recovery appliances.
+• Consistently recognized for surpassing client and project expectations, my performance has been acknowledged through multiple accolades attesting to my commitment to excellence.• Accomplished Data Protection & Infrastructure Solutions Architect and seasoned IT Consultant with over 17 years of global consulting experience across APJ, EMEA, and the Americas • Expertise in backup & recovery, security, compliance, infrastructure modernization, and cloud security. • Proven ability to design and implement enterprise data protection strategies, aligning IT transformation with business objectives while ensuring compliance with industry security standards (GDPR, CDPA, NIST, PSI DSS, ISO 27001). • Adept at working with cross-functional teams, executive stakeholders, and technology partners to drive innovation, optimize operational efficiency, and enhance data security resilience. • Demonstrated proficiency in conceptualizing and executing large-scale IT transformation initiatives focused on enhancing data protection frameworks. • Demonstrated mastery of Dell Data Protection solutions including Avamar, NetWorker, Data Domain, Cyber Recovery, Power Protect Data Manager, and Integrated Data Protection Appliance, complemented by a comprehensive understanding of Non-Dell offerings such as IBM Spectrum Protect / Protect Plus, Commvault, Rubrik, Cohesity, NetBackup, and Veeam. • Possess extensive experience with Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform, particularly in integrating these platforms with Dell's Data Domain and backup products, including cloud tiering and cloud disaster recovery appliances. • Consistently recognized for surpassing client and project expectations, my performance has been acknowledged through multiple accolades attesting to my commitment to excellence.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="#experience" class="px-5 py-2.5 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow">View Experience</a>
+        <a href="#projects" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70">See Projects</a>
+        <a href="Maulik%20Shah.pdf" download="Maulik%20Shah.pdf" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70">Download CV</a>
+      </div>
+    </div>
+    <div class="md:col-span-5">
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
+        <h3 class="font-semibold text-lg">Highlights</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li>13.7+ years across Support • Dev • Automation</li>
+          <li>CTB/RTB ownership • Tier‑3 support • Resilience</li>
+          <li>Power Platform • .NET • Azure • SQL/Oracle</li>
+          <li>Process automation & incident reduction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Experience Timeline</h2>
+    <div class="mt-6 space-y-6">
+      <!-- Role 1 -->
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Specialist Software Engineer — LTIMindtree (Canada)</h3>
+          <span class="text-xs opacity-70">2017–2025</span>
+        </div>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>End‑to‑end CTB/RTB delivery and Tier‑3 production support for multiple apps.</li>
+          <li>Upgrades & migrations: SQL/Oracle/Citrix/Office with zero downstream impact.</li>
+          <li>Support automation reduced manual effort 30–50% and improved SLA compliance.</li>
+          <li>Stack: C#, VB.NET, Power Automate, Power Apps, Dataverse, Azure, SQL Server, Oracle, REST APIs, Git.</li>
+        </ul>
+      </div>
+      <!-- Role 2 -->
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Sr. Software Engineer — LTIMindtree (USA & Canada)</h3>
+          <span class="text-xs opacity-70">2016–2017</span>
+        </div>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>On‑site leadership for monitoring, migrations, and enhancements across portfolios.</li>
+          <li>Coordinated cross‑functional teams to ship stable deployments and upgrades.</li>
+        </ul>
+      </div>
+      <!-- Role 3 -->
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Software Engineer → Associate Software Engineer → Trainee — LTIMindtree (India)</h3>
+          <span class="text-xs opacity-70">2011–2016</span>
+        </div>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>Modernized legacy backends, automated reporting (500 hrs → 50 hrs).</li>
+          <li>Strengthened BAU support, incident resolution, and release management.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Selected Projects</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+        <div class="flex items-center justify-between"><h4 class="font-semibold">Informatica MDM – Aviva Insurance</h4><span class="text-xs opacity-70">2024–2025</span></div>
+        <p class="mt-2 text-sm opacity-90">Reverse‑engineering architecture & alignment</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Java</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Oracle</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Informatica IDCM</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">REST APIs</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">UML</span>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+        <div class="flex items-center justify-between"><h4 class="font-semibold">Client Onboarding Experience System</h4><span class="text-xs opacity-70">2023–2024</span></div>
+        <p class="mt-2 text-sm opacity-90">Automation with Power Platform & DevOps</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Power Apps</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Power Automate</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Dataverse</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Azure DevOps</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">D365</span>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+        <div class="flex items-center justify-between"><h4 class="font-semibold">Invoice Request & Intake Tools</h4><span class="text-xs opacity-70">2019–2023</span></div>
+        <p class="mt-2 text-sm opacity-90">Standardization & RPA</p>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Access</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">SQL Server</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Blue Prism</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Power Automate</span>
+          <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">SharePoint</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards Carousel -->
+  <section id="awards" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Awards & Recognition</h2>
+    <div class="mt-6 flex items-center gap-3">
+      <button id="aw-prev" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Prev</button>
+      <a id="aw-card" href="#" target="_blank" rel="noreferrer" class="flex-1">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6 text-center">
+          <div id="aw-year" class="text-sm opacity-70">—</div>
+          <div id="aw-name" class="text-xl font-semibold mt-1">—</div>
+          <div class="text-xs opacity-70 mt-2">Click to view proof on LinkedIn</div>
+        </div>
+      </a>
+      <button id="aw-next" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Next</button>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certs" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Certifications</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="https://learn.microsoft.com/api/credentials/share/en-us/MaulikSHAH-9347/6D705AEFE714257E?sharingId=254C77B0EEF6FDC4" target="_blank" rel="noreferrer" class="block">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+          <h4 class="font-medium leading-snug">PL‑900: Power Platform Fundamentals</h4>
+          <p class="mt-1 text-xs opacity-70 break-all">Microsoft Learn share link</p>
+        </div>
+      </a>
+      <a href="https://learn.microsoft.com/api/credentials/share/en-us/MaulikSHAH-9347/402C1BCEF9011AE5?sharingId=254C77B0EEF6FDC4" target="_blank" rel="noreferrer" class="block">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+          <h4 class="font-medium leading-snug">Applied Skills (Power Automate / Power Apps / Dataverse)</h4>
+          <p class="mt-1 text-xs opacity-70 break-all">Microsoft Learn share link</p>
+        </div>
+      </a>
+      <a href="https://www.credly.com/badges/10a38790-5cfc-4864-bcd0-af46cdd326ad/public_url" target="_blank" rel="noreferrer" class="block">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+          <h4 class="font-medium leading-snug">AWS Partner Technical Accredited</h4>
+          <p class="mt-1 text-xs opacity-70 break-all">Credly link</p>
+        </div>
+      </a>
+      <a href="https://credentials.databricks.com/5bf63990-aecd-4998-bf57-52d98762e90f" target="_blank" rel="noreferrer" class="block">
+        <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-5">
+          <h4 class="font-medium leading-snug">Databricks Lakehouse & Generative AI</h4>
+          <p class="mt-1 text-xs opacity-70 break-all">Databricks credentials</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Skills (filterable)</h2>
+    <div class="flex items-center gap-3 mb-4 mt-6">
+      <input id="skillq" class="w-full md:w-80 px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70 bg-white/80 dark:bg-slate-900/60" placeholder="Type to filter… (e.g., power, sql, azure)" />
+      <button id="skillclear" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70">Clear</button>
+    </div>
+    <div id="skilltags" class="flex flex-wrap gap-2 text-sm"></div>
+  </section>
+
+  <!-- Full CV -->
+  <section id="fullcv" class="mx-auto max-w-7xl px-4 py-10">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight"></h2>
+    <div class="mt-4 rounded-2xl overflow-hidden border border-slate-200/70 dark:border-slate-800/70">
+      <!-- IMPORTANT: Place your files at /cv/ :
+           cv/Maulik Shah-Detailed-CV.htm
+           cv/Maulik Shah-Detailed-CV_files/... -->
+      <iframe title="Full CV" src="cv/Maulik-Shah-Detailed-CV-clean.html" class="w-full cv-frame bg-white"></iframe>
+    </div>
+    <div class="mt-3 flex gap-3">
+      <a href="cv/Maulik-Shah-Detailed-CV-clean.html" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">Open Full Screen</a>
+      <a href="Maulik%20Shah.pdf" download="Maulik%20Shah.pdf" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70">Download CV</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-7xl px-4 py-10">
+    <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6">
+      <div class="flex flex-col md:flex-row md:items-center gap-4">
+        <div class="grow">
+          <h4 class="font-semibold">Let’s talk</h4>
+          <p class="opacity-80 text-sm mt-1">Open to roles in Power Platform, .NET, App Support, and Cloud modernization.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="mailto:Mmsgk251804@gmail.com" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">Email</a>
+          <a href="https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-2xl border border-slate-300/70 dark:border-slate-700/70">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Ideas & Innovation -->
+<section id="ideas" class="mx-auto max-w-7xl px-4 py-10">
+  <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Ideas & Innovation</h2>
+
+  <!-- Azure Hot Keys Showcase -->
+  <div class="mt-6">
+    <div class="relative rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 shadow-sm p-6 overflow-hidden" data-showcase>
+      <!-- Front content -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-semibold">Azure Hot Keys - Productivity Accelerator</h3>
+          <p class="mt-2 text-sm opacity-90 max-w-2xl">
+            An original concept to accelerate Azure operations with <strong>keyboard shortcuts</strong>. 
+            Perform secure, role-aware actions via <em>context-aware hot keys</em> instead of deep portal navigation.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Concept</span>
+            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">RBAC-aware</span>
+            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">DevOps friendly</span>
+            <span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Accessibility</span>
+          </div>
+        </div>
+        <div class="shrink-0">
+          <button type="button" class="peek-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow"
+                  aria-haspopup="dialog" aria-controls="ahk-overlay">
+            Peek document
+          </button>
+          <a href="assets/Azure-Hot-Keys-Concept.pdf" target="_blank" rel="noopener"
+             class="ml-2 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">
+            📄 View full PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- Hover/tap overlay -->
+      <div id="ahk-overlay"
+           class="absolute inset-0 flex items-center justify-center bg-slate-900/90 text-white opacity-0 pointer-events-none transition-opacity"
+           role="dialog" aria-modal="false" aria-label="Azure Hot Keys document preview">
+        <div class="w-full max-w-3xl mx-auto px-4">
+          <h4 class="text-center font-semibold">Preview: Concept Document (Page 1)</h4>
+
+          <!-- Mini PDF preview -->
+          <div class="mt-3 rounded-xl overflow-hidden border border-white/20 bg-black/20 h-[900px]">
+            <!-- Try iframe first -->
+            <iframe class="w-full h-full"
+                    src="assets/Azure-Hot-Keys-Concept.pdf#page=1&zoom=45"
+                    title="Azure Hot Keys Concept (Preview)"
+                    loading="lazy"></iframe>
+          </div>
+
+          <div class="mt-4 flex flex-wrap justify-center gap-3">
+            <a class="px-4 py-2 rounded-xl bg-white text-slate-900" href="assets/Azure-Hot-Keys-Concept.pdf" target="_blank" rel="noopener">📄 View Full Document</a>
+            <button type="button" class="px-4 py-2 rounded-xl border border-white/50" data-close>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bullets (optional) -->
+    <div class="mt-4 grid md:grid-cols-3 gap-4 text-sm">
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 p-4">
+        <h4 class="font-medium">Why it matters</h4>
+        <ul class="mt-2 list-disc list-inside opacity-90">
+          <li>Reduce navigation time via instant actions</li>
+          <li>Respect RBAC and policies for safety</li>
+          <li>Keyboard-first accessibility</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 p-4">
+        <h4 class="font-medium">How it could work</h4>
+        <ul class="mt-2 list-disc list-inside opacity-90">
+          <li>Context-aware key maps per subscription/resource</li>
+          <li>Confirmations for sensitive ops</li>
+          <li>Extensible JSON/YAML profiles</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/60 p-4">
+        <h4 class="font-medium">Sample keys</h4>
+        <div class="mt-2 space-y-1 font-mono text-xs opacity-90">
+          <div><kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">Alt</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">A</kbd> → Resource Search</div>
+          <div><kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">Alt</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">R</kbd> → Jump to RG</div>
+          <div><kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">Alt</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">M</kbd> → Metrics</div>
+          <div><kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">Alt</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">L</kbd> → Live Logs</div>
+          <div><kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">Alt</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-slate-800">S</kbd> → Start/Stop (confirm)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-10 text-center opacity-70 text-sm">
+  © <span id="yr"></span> Maulik Mukund Shah · 
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=maulikMshah.Portfolio" alt="visitor badge"/>
+</footer>
+<script>
+  // Ideas overlay (supports hover on desktop, tap on mobile)
+  (function () {
+    const card = document.querySelector('[data-showcase]');
+    if (!card) return;
+    const overlay = card.querySelector('#ahk-overlay');
+    const peekBtn = card.querySelector('.peek-btn');
+    const closeBtn = card.querySelector('[data-close]');
+    const isTouch = matchMedia('(hover:none) and (pointer:coarse)').matches;
+
+    function openOverlay() {
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+      overlay.setAttribute('aria-modal', 'true');
+    }
+    function closeOverlay() {
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      overlay.setAttribute('aria-modal', 'false');
+    }
+
+    // Desktop hover is handled by CSS (we still support explicit open)
+    peekBtn?.addEventListener('click', (e) => { e.preventDefault(); openOverlay(); });
+    closeBtn?.addEventListener('click', (e) => { e.preventDefault(); closeOverlay(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeOverlay(); });
+
+    // On touch devices, toggle overlay when tapping the card
+    if (isTouch) {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) return;
+        const visible = overlay.style.pointerEvents === 'auto';
+        visible ? closeOverlay() : openOverlay();
+      });
+    }
+  })();
+</script>
+  <script>
+    // Dark mode toggle
+    const dm = document.getElementById('dm');
+    const updateDMLabel = () => { dm.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark'; };
+    dm.addEventListener('click', () => { document.documentElement.classList.toggle('dark'); updateDMLabel(); localStorage.setItem('ms-dark', document.documentElement.classList.contains('dark') ? '1' : '0');});
+    const saved = localStorage.getItem('ms-dark');
+    if (saved === '0') { document.documentElement.classList.remove('dark'); }
+    updateDMLabel();
+
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Awards Carousel
+    const awards = [
+      { name: 'Shooting Star', year: '2023', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/experience/206979330/multiple-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos&treasuryMediaId=1734697030481' },
+      { name: 'Stalwart', year: '2022', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/experience/206979330/multiple-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos&treasuryMediaId=1734700265441' },
+      { name: 'Above & Beyond', year: '2020', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/experience/206979330/multiple-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos&treasuryMediaId=1738939367167' },
+      { name: 'Star & Cash (MVP)', year: '2019', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/experience/206979330/multiple-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos&treasuryMediaId=1740146449367' },
+      { name: 'Most Valuable', year: '2017–2018', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/experience/206979330/multiple-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos&treasuryMediaId=1734701260029' },
+      { name: 'Achiever of the Month', year: '2015', url: 'https://www.linkedin.com/in/maulik-mukund-shah-20139b2a/overlay/1734696487939/single-media-viewer/?profileId=ACoAAAYbqGEB6eQiz7M5rR-BN2A4GftSqJyYqos' }
+    ];
+    let awIdx = 0;
+    const awPrev = document.getElementById('aw-prev');
+    const awNext = document.getElementById('aw-next');
+    const awCard = document.getElementById('aw-card');
+    const awYear = document.getElementById('aw-year');
+    const awName = document.getElementById('aw-name');
+    function awRender(){ const c = awards[awIdx]; awCard.href = c.url; awYear.textContent = c.year; awName.textContent = c.name; }
+    awPrev.addEventListener('click', ()=>{ awIdx = (awIdx - 1 + awards.length) % awards.length; awRender(); });
+    awNext.addEventListener('click', ()=>{ awIdx = (awIdx + 1) % awards.length; awRender(); });
+    awRender();
+    setInterval(()=>{ awIdx = (awIdx + 1) % awards.length; awRender(); }, 4000);
+
+    // Skills
+    const skills = [
+      'Power Platform','Power Automate','Power Apps','Dataverse','C#','VB.NET','.NET','Azure','SQL Server','Oracle','REST APIs','Git','GitHub Actions','Blue Prism','ServiceNow','JIRA','Confluence','Power BI','DAX','PlantUML','Visio','Citrix XenApp','Salesforce Connectors'
+    ];
+    const skillTags = document.getElementById('skilltags');
+    const skillQ = document.getElementById('skillq');
+    const skillClear = document.getElementById('skillclear');
+    function renderSkills(){
+      const q = (skillQ.value || '').toLowerCase();
+      skillTags.innerHTML = '';
+      skills.filter(s => s.toLowerCase().includes(q)).forEach(s => {
+        const el = document.createElement('span');
+        el.textContent = s;
+        el.className = 'px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70';
+        skillTags.appendChild(el);
+      });
+    }
+    skillQ.addEventListener('input', renderSkills);
+    skillClear.addEventListener('click', () => { skillQ.value=''; renderSkills(); });
+    renderSkills();
+  </script>
+</body>
+</html>
