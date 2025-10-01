@@ -3,367 +3,343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Timeline CV</title>
+<title>Interactive CV Timeline</title>
 <style>
 body {
-  font-family: Arial, sans-serif;
-  background: #121212;
-  color: #e0e0e0;
   margin: 0;
-  padding: 20px;
-}
-h2 {
-  text-align: center;
-  color: #1e90ff;
-  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  overflow-x: hidden;
 }
 .legend {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
   gap: 20px;
+  padding: 10px;
+  font-size: 14px;
 }
-.legend-item {
+.legend span {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
-  color: #e0e0e0;
 }
-.legend-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+.legend .color-box {
+  width: 15px;
+  height: 15px;
   display: inline-block;
 }
 .year-overview {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  gap: 5px;
-  transform-origin: left center;
-}
-.year-overview button {
-  background: #1c1c1c;
-  color: #aaa;
-  border: 1px solid #333;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.year-overview button:hover, .year-overview button.active {
-  background: #1e90ff;
-  color: #fff;
-}
-.timeline-container {
   overflow-x: auto;
-  position: relative;
-  padding: 80px 0 80px 0;
-  background: #1c1c1c;
-  border-bottom: 3px solid #1e90ff;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-.timeline-wrapper {
-  position: relative;
-  white-space: nowrap;
-  height: 250px;
-  transform-origin: left center;
-  transition: transform 0.3s ease;
-}
-.timeline-year {
-  position: absolute;
-  top: 180px;
-  font-size: 12px;
-  color: #aaa;
-  transform-origin: left center;
-}
-.duration-bar, .timeline-point {
-  opacity: 0;
-  transform: translateX(-100px);
-  transition: all 0.6s ease-out;
-}
-.duration-bar.visible, .timeline-point.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-.duration-bar {
-  position: absolute;
-  height: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  scroll-snap-align: start;
-}
-.timeline-point {
-  position: absolute;
-  cursor: pointer;
-  text-align: center;
-  transition: transform 0.2s, scale 0.3s;
-}
-.timeline-point img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 2px solid #1e90ff;
-  margin-bottom: 5px;
-  transition: transform 0.2s;
-  background: #121212;
-}
-.timeline-point:hover img {
-  transform: scale(1.2);
-}
-.timeline-point span {
-  display: block;
-  font-size: 12px;
-  max-width: 100px;
-  color: #e0e0e0;
-}
-.timeline-point::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 70px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1e90ff;
-  color: #fff;
-  padding: 3px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  display: none;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  background: #1a1a1a;
+  padding: 10px;
   z-index: 10;
 }
-.timeline-point:hover::after {
-  display: block;
+.year-label {
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.year-label.active {
+  font-weight: bold;
+  color: #ffcc00;
+}
+.timeline-container {
+  position: relative;
+  overflow-x: auto;
+  padding: 60px 20px 100px 20px;
+  scroll-behavior: smooth;
+}
+.timeline {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 200px;
+  gap: 50px;
+  transition: transform 0.3s ease;
+}
+.experience-point {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.experience-bar {
+  height: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 40px;
+  transition: width 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+}
+.experience-point img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+  transition: transform 0.3s;
 }
 .popup {
   position: absolute;
-  max-width: 300px;
-  background: #1c1c1c;
-  padding: 15px;
-  border-radius: 8px;
-  border: 2px solid #1e90ff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-  z-index: 100;
-  color: #e0e0e0;
-  transition: all 0.3s ease;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #222;
+  color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  z-index: 20;
+  transition: transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-.popup h3 {
-  margin: 0 0 5px 0;
-  font-size: 16px;
-  color: #1e90ff;
+.popup.active {
+  transform: translateX(-50%) scale(1);
 }
-.popup h4 {
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #fff;
-}
-.popup ul {
-  padding-left: 20px;
-  margin: 0;
-}
-svg.connectors {
+svg.connector {
   position: absolute;
   top: 0;
   left: 0;
+  overflow: visible;
   pointer-events: none;
-  width: 100%;
-  height: 100%;
 }
 @media (max-width: 768px) {
-  .timeline-wrapper {
-    height: 300px;
-    padding-bottom: 80px;
+  .timeline {
+    gap: 30px;
+    height: 250px;
   }
-  .timeline-point img {
-    width: 50px;
-    height: 50px;
+  .experience-point img {
+    width: 40px;
+    height: 40px;
   }
   .popup {
-    max-width: 250px;
-    font-size: 12px;
+    width: 250px;
   }
 }
 </style>
 </head>
 <body>
-
-<h2>Professional Experience Timeline (2005–2025)-latest</h2>
-
+<h2>Professional Experience Timeline (2005–2025) - Latest 2</h2>
 <div class="legend">
-  <div class="legend-item"><span class="legend-color" style="background:#32cd32"></span> Implementation</div>
-  <div class="legend-item"><span class="legend-color" style="background:#1e90ff"></span> Architect</div>
-  <div class="legend-item"><span class="legend-color" style="background:#ff8c00"></span> Founder</div>
+  <span><span class="color-box" style="background-color:#ff5733;"></span> Implementation</span>
+  <span><span class="color-box" style="background-color:#33ff57;"></span> Architect</span>
+  <span><span class="color-box" style="background-color:#3357ff;"></span> Founder & Principal Consultant</span>
 </div>
 
 <div class="year-overview" id="yearOverview"></div>
-
 <div class="timeline-container" id="timelineContainer">
-  <div class="timeline-wrapper" id="timelineWrapper"></div>
-  <svg class="connectors" id="connectorSvg"></svg>
+  <div class="timeline" id="timeline"></div>
+  <svg class="connector" id="connectors"></svg>
 </div>
 
 <script>
-const timelineWrapper = document.getElementById('timelineWrapper');
-const timelineContainer = document.getElementById('timelineContainer');
-const connectorSvg = document.getElementById('connectorSvg');
-const yearOverview = document.getElementById('yearOverview');
-
-const startYear = 2005;
-const endYear = 2025;
-const roleColors = { "Founder": "#ff8c00", "Architect": "#1e90ff", "Implementation": "#32cd32" };
-
 const experiences = [
-  { title: "Technical Consultant / Implementation Specialist", company: "EMC Thailand", startYear: 2006, endYear: 2007, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Provided technical consultancy and delivered solutions across APJ region.</li></ul>` },
-  { title: "Implementation Delivery Specialist", company: "EMC India", startYear: 2007, endYear: 2010, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Deployed backup & recovery solutions in South Asia.</li></ul>` },
-  { title: "Senior Implementation Delivery Specialist", company: "EMC Middle East", startYear: 2010, endYear: 2013, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Implemented backup & recovery systems in GCC region.</li></ul>` },
-  { title: "Senior Advisor / Senior Solutions Architect", company: "Dell EMC Middle East", startYear: 2013, endYear: 2018, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Delivered tailored data protection solutions integrating AI.</li></ul>` },
-  { title: "Consultant Solutions Architect", company: "Dell Technologies", startYear: 2018, endYear: 2024, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Engaged clients for hybrid cloud integration and compliance.</li></ul>` },
-  { title: "Founder & Principal Consultant", company: "Vivanka Inc.", startYear: 2024, endYear: 2025, roleType: "Founder", logo: "images/vivanka-logo.png", details: `<ul><li>Consulting for Canadian enterprises on modernizing backup and cyber recovery.</li></ul>` }
+  { 
+    title: "Technical Consultant / Implementation Specialist", 
+    company: "EMC Thailand", 
+    startYear: 2006, 
+    endYear: 2007, 
+    roleType: "Implementation", 
+    logo: "images/emc-logo.png", 
+    details: `<p>As a Technical Consultant and Implementation Specialist for Backup and Recovery solutions at EMC, I provided technical consultancy and delivered information protection solutions to clients in the APJ region.</p>
+    <strong>Key Projects:</strong>
+    <ul>
+      <li>Implemented NetWorker at various organizations including PTT Thai Oil Public Co. Ltd, Ministry of External Affairs (Bangkok), DTAC, True Move, Siam Pharmaceuticals, and Mitsubishi Motors Ltd.</li>
+      <li>Implemented DiskXtender for UNIX/Linux at BAAC.</li>
+      <li>Developed Java code for file permissions settings before archiving using DiskXtender for a customer in Malaysia.</li>
+    </ul>` 
+  },
+  { 
+    title: "Implementation Delivery Specialist", 
+    company: "EMC India", 
+    startYear: 2007, 
+    endYear: 2010, 
+    roleType: "Implementation", 
+    logo: "images/emc-logo.png", 
+    details: `<p>As an Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I deployed backup and recovery solutions for customers in South Asia.</p>
+    <strong>Key Contributions:</strong>
+    <ul>
+      <li>Provided delivery services for backup and recovery solutions to customers in the South Asia region.</li>
+      <li>Implemented a combination of EMC products including NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase (BMR) solutions, EMC EmailXtender (SourceOne), and EMC DiskExtender.</li>
+    </ul>` 
+  },
+  { 
+    title: "Senior Implementation Delivery Specialist", 
+    company: "EMC Middle East", 
+    startYear: 2010, 
+    endYear: 2013, 
+    roleType: "Implementation", 
+    logo: "images/emc-logo.png", 
+    details: `<p>As a Senior Implementation Delivery Specialist for Backup & Recovery Systems (BRS) at EMC, I provided implementation services for data protection solutions in the GCC region. My responsibilities included performing complex software implementations, managing delivery of services, and ensuring high customer satisfaction.</p>
+    <strong>Key Contributions:</strong>
+    <ul>
+      <li>Delivered implementation services for backup and recovery solutions to customers in the GCC region, ensuring adherence to specifications and design documents.</li>
+      <li>Managed implementation delivery of services to achieve high customer satisfaction.</li>
+      <li>Collaborated with EMC colleagues worldwide to resolve technical issues encountered during implementations.</li>
+      <li>Identified client needs, assessed risks, and recommended appropriate product offerings to meet objectives.</li>
+    </ul>` 
+  },
+  { 
+    title: "Senior Advisor / Senior Solutions Architect", 
+    company: "Dell EMC Middle East", 
+    startYear: 2013, 
+    endYear: 2018, 
+    roleType: "Architect", 
+    logo: "images/dell-logo.png", 
+    details: `<p>As a Senior Advisor Solutions Architect for Data Protection Systems (DPS) at Dell EMC in the GCC region, I closely collaborated with clients to deliver tailored data protection solutions. My expertise covered EMC’s backup and recovery products, such as NetWorker, Data Domain, Avamar, Data Protection Advisor, Cristie BMR solutions, IDPA, and integration with Enterprise Hybrid Cloud. I also integrated third-party solutions, such as Commvault, Veeam, and IBM Spectrum Protect, while driving AI-focused initiatives to enhance automation, predictive analytics, and threat detection in data protection strategies.</p>
+    <strong>Key Contributions:</strong>
+    <ul>
+      <li>Delivered bespoke solutions for global accounts, optimizing data protection strategies and driving significant business value through tailored implementations.</li>
+      <li>Initiated and led AI-focused training programs, promoting the integration of AI technologies into the design and implementation of data protection solutions, enhancing operational efficiency, security, and proactive risk management.</li>
+      <li>Played a vital role in supporting sales efforts by leveraging technical expertise to strengthen client relationships and drive revenue growth.</li>
+      <li>Conducted proof-of-concept (PoC) initiatives, demonstrating the capabilities of EMC Backup and Recovery solutions, and incorporating AI for enhanced automation, predictive maintenance, and threat detection.</li>
+      <li>Mentored colleagues and new hires, fostering a collaborative team environment and contributing to their professional success by introducing AI-driven methodologies for data protection and recovery, resulting in more efficient implementations.</li>
+      <li>Demonstrated proactive problem-solving capabilities, swiftly resolving escalations with minimal disruption to clients, leveraging AI-based solutions to improve response times and problem resolution.</li>
+      <li>Hands-on experience with Cohesity DataProtect, including protection policy configuration, VMware/SQL/NAS integrations, and recovery workflows, developed through small projects, lab work and client solution design exposure.</li>
+      <li>Awarded Solution Architect of the Year for Gulf and Pakistan in 2014, highlighting excellence in delivering innovative solutions and exceptional client service.</li>
+      <li>Successfully designed and implemented backup and recovery solutions for large enterprise clients in the GCC region, ensuring compliance with data protection regulations and enabling business continuity.</li>
+      <li>Led end-to-end project delivery, ensuring seamless implementation and integration of EMC Backup and Recovery Portfolio solutions, while leveraging cloud technologies and hybrid architectures.</li>
+      <li>Spearheaded the integration of data protection solutions with Federation Enterprise Hybrid Cloud projects, enhancing scalability and flexibility.</li>
+      <li>Led the migration of on-premise applications to Google Cloud Platform (GCP), utilizing Compute Engine, Cloud Storage, and Cloud SQL, resulting in a 30% reduction in operational costs.</li>
+    </ul>` 
+  },
+  { 
+    title: "Consultant Solutions Architect", 
+    company: "Dell Technologies", 
+    startYear: 2018, 
+    endYear: 2024, 
+    roleType: "Architect", 
+    logo: "images/dell-logo.png", 
+    details: `<p>As a Consultant Solutions Architect for Data Protection Systems (DPS) at Dell Technologies, I specialized in engaging with clients to understand their business challenges and craft customized data protection solutions. I provided deep technical expertise in Dell's backup and recovery products, including NetWorker, Data Domain, Avamar, PowerProtect Data Manager, and Cyber Recovery, with a focus on integrating enterprise hybrid cloud environments and ensuring compliance with security and governance frameworks.</p>
+    <strong>Key Contributions:</strong>
+    <ul>
+      <li>Served as a trusted technical advisor, guiding clients through data protection strategies and cyber recovery implementations to enhance resilience against cyber threats.</li>
+      <li>Led pre-sales engagements by demonstrating product capabilities, tailoring solutions to client needs, and advising on security best practices, improving customer adoption rates.</li>
+      <li>Initiated the integration of Generative AI-based solutions into data protection strategies, enhancing automation, threat detection, and predictive analytics for improved security and operational efficiency.</li>
+      <li>Delivered technical presentations and hands-on demonstrations showcasing Dell's data protection portfolio, helping customers optimize their disaster recovery and compliance strategies.</li>
+      <li>Developed and facilitated client workshops, design thinking sessions, and proof-of-concept implementations to illustrate real-world use cases and ensure solution alignment with business goals.</li>
+      <li>Provided technical consulting and support for hybrid and multi-cloud backup solutions, including integration with Microsoft Azure, AWS, and Google Cloud Platform, optimizing disaster recovery and cloud tiering strategies.</li>
+      <li>Influenced key stakeholders by translating complex technical concepts into business value, ensuring executive buy-in and successful adoption of data protection solutions.</li>
+      <li>Designed and implemented Veeam Backup & Replication with Dell EMC Data Domain as backend storage, ensuring efficient deduplication, compression, and secure long-term retention as well as providing implementation best practices.</li>
+      <li>Spearheaded cross-functional collaboration between sales, product teams, and customers to enhance solution positioning and increase market penetration.</li>
+      <li>Evangelized Dell Technologies' data protection solutions through webinars and industry events, positioning the company as a leader in enterprise data security and compliance.</li>
+    </ul>` 
+  },
+  { 
+    title: "Founder & Principal Consultant", 
+    company: "Vivanka Inc.", 
+    startYear: 2024, 
+    endYear: 2025, 
+    roleType: "Founder", 
+    logo: "images/vivanka-logo.png", 
+    details: `<p>Provided consulting services to Canadian enterprises on modernizing backup and cyber recovery strategies. Delivered end-to-end architecture, migration, and implementation services while engaging with stakeholders to ensure business alignment.</p>
+    <strong>Key Engagements:</strong>
+    <ul>
+      <li>Led a 6 month engagement to migrate legacy NetWorker environment to latest version, modernizing backup infrastructure & improving recovery SLAs.</li>
+      <li>Designed and deployed PowerProtect Data Manager (PPDM) with Data Domain and cloud tier across primary and secondary sites, enabling cost-optimized long-term retention.</li>
+      <li>Executed multiple PPDM + Data Domain projects, positioning Dell solutions for hybrid-cloud adoption with Azure cloud tier integration.</li>
+      <li>Pre-Sales Impact: Delivered architecture design sessions, conducted solution workshops, and influenced customer adoption of Dell Technologies by articulating both technical benefits and business value (compliance, cost efficiency, cyber resilience).</li>
+    </ul>` 
+  }
 ];
 
-function yearToLeft(year) {
-  const containerWidth = Math.max(timelineWrapper.clientWidth, window.innerWidth);
-  return ((year - startYear) / (endYear - startYear)) * (containerWidth - 100) + 50;
-}
+// --- JavaScript for rendering timeline, popups, snapping, zoom, connectors, animations ---
+(function() {
+  const timelineContainer = document.getElementById('timelineContainer');
+  const timeline = document.getElementById('timeline');
+  const yearOverview = document.getElementById('yearOverview');
+  const connectorsSvg = document.getElementById('connectors');
 
-// Mini overview buttons
-for (let y = startYear; y <= endYear; y++) {
-  const btn = document.createElement('button');
-  btn.innerText = y;
-  btn.addEventListener('click', () => {
-    timelineContainer.scrollTo({ left: yearToLeft(y) - 50, behavior: 'smooth' });
+  const startYear = 2005;
+  const endYear = 2025;
+  const pixelPerYear = 100;
+
+  // Generate year overview
+  for(let y = startYear; y <= endYear; y++){
+    const yLabel = document.createElement('div');
+    yLabel.classList.add('year-label');
+    yLabel.textContent = y;
+    yLabel.dataset.year = y;
+    yearOverview.appendChild(yLabel);
+    yLabel.addEventListener('click', ()=> openYear(y));
+  }
+
+  // Generate timeline points
+  experiences.forEach((exp, index)=>{
+    const point = document.createElement('div');
+    point.classList.add('experience-point');
+    point.style.left = ((exp.startYear-startYear)*pixelPerYear)+'px';
+    point.dataset.index = index;
+
+    const img = document.createElement('img');
+    img.src = exp.logo;
+    img.title = exp.company;
+    point.appendChild(img);
+
+    const bar = document.createElement('div');
+    bar.classList.add('experience-bar');
+    bar.style.backgroundColor = exp.roleType==='Founder' ? '#3357ff' : exp.roleType==='Architect' ? '#33ff57' : '#ff5733';
+    bar.style.width = ((exp.endYear-exp.startYear+1)*pixelPerYear)+'px';
+    bar.style.opacity = 1;
+    point.appendChild(bar);
+
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company}</h4>${exp.details}`;
+    point.appendChild(popup);
+
+    img.addEventListener('click', ()=>{
+      document.querySelectorAll('.popup.active').forEach(p=>p.classList.remove('active'));
+      popup.classList.add('active');
+      // shrink other points
+      document.querySelectorAll('.experience-point img').forEach(i=>i.style.transform='scale(0.7)');
+      img.style.transform='scale(1)';
+    });
+
+    timeline.appendChild(point);
   });
-  yearOverview.appendChild(btn);
-}
 
-// Year labels
-for (let y = startYear; y <= endYear; y++) {
-  const yearDiv = document.createElement('div');
-  yearDiv.className = 'timeline-year';
-  yearDiv.style.left = yearToLeft(y) - 15 + 'px';
-  yearDiv.innerText = y;
-  timelineWrapper.appendChild(yearDiv);
-}
-
-// Vertical offsets for overlapping roles
-const verticalOffsets = {};
-function getVerticalOffset(company) {
-  verticalOffsets[company] = (verticalOffsets[company] || 0) + 1;
-  return verticalOffsets[company] * 70;
-}
-
-// Store points for connectors
-const companyPoints = {};
-
-experiences.forEach(exp => {
-  const left = yearToLeft(exp.startYear);
-  const right = yearToLeft(exp.endYear);
-  const width = right - left;
-  const topOffset = getVerticalOffset(exp.company);
-  const color = roleColors[exp.roleType] || "#1e90ff";
-
-  // Duration bar
-  const bar = document.createElement('div');
-  bar.className = 'duration-bar';
-  bar.style.left = left + 'px';
-  bar.style.width = width + 'px';
-  bar.style.top = topOffset + 'px';
-  bar.style.backgroundColor = color + "88";
-  timelineWrapper.appendChild(bar);
-
-  // Point
-  const point = document.createElement('div');
-  point.className = 'timeline-point';
-  point.style.left = left + 'px';
-  point.style.top = (topOffset - 40) + 'px';
-  point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo" /><span>${exp.company}</span>`;
-  point.dataset.tooltip = exp.startYear + " – " + exp.endYear;
-  timelineWrapper.appendChild(point);
-
-  setTimeout(()=> {
-    bar.classList.add('visible');
-    point.classList.add('visible');
-  }, 100);
-
-  // Popup
-  const popup = document.createElement('div');
-  popup.className = 'popup';
-  popup.style.display = 'none';
-  popup.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company}</h4>${exp.details}`;
-  document.body.appendChild(popup);
-
-  point.addEventListener('click', () => {
-    document.querySelectorAll('.popup').forEach(p=>p.style.display='none');
-    popup.style.display = 'block';
-    const rect = point.getBoundingClientRect();
-    popup.style.left = rect.left + rect.width/2 - popup.offsetWidth/2 + 'px';
-    popup.style.top = rect.top - popup.offsetHeight - 10 + 'px';
-
-    // Shrink other bars
-    document.querySelectorAll('.duration-bar').forEach(b => {
-      if(b !== bar) b.style.transform = 'scaleY(0.5)';
-      else b.style.transform = 'scaleY(1)';
+  // Snap scrolling and highlight current year
+  timelineContainer.addEventListener('scroll', ()=> {
+    const scrollLeft = timelineContainer.scrollLeft;
+    const visibleYear = Math.round(scrollLeft/pixelPerYear) + startYear;
+    document.querySelectorAll('.year-label').forEach(y=>{
+      y.classList.toggle('active', y.dataset.year==visibleYear);
     });
   });
 
-  if(!companyPoints[exp.company]) companyPoints[exp.company] = [];
-  companyPoints[exp.company].push({x: left+30, y: topOffset+10});
-});
-
-// Connectors with bounce effect
-function drawConnectors() {
-  connectorSvg.innerHTML = '';
-  for(const company in companyPoints) {
-    const points = companyPoints[company];
-    for(let i=0; i<points.length-1; i++) {
-      const p1 = points[i];
-      const p2 = points[i+1];
-      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
-      path.setAttribute("stroke","#888");
-      path.setAttribute("stroke-width","2");
-      path.setAttribute("fill","none");
-      connectorSvg.appendChild(path);
-
-      function animatePath() {
-        const scrollOffset = timelineContainer.scrollLeft;
-        const bounce = Math.sin((scrollOffset + i*50) * 0.01) * 10;
-        path.setAttribute("d", `M${p1.x},${p1.y + bounce} C${p1.x+50},${p1.y + bounce} ${p2.x-50},${p2.y + bounce} ${p2.x},${p2.y + bounce}`);
-        requestAnimationFrame(animatePath);
+  function openYear(year){
+    experiences.forEach((exp,index)=>{
+      if(exp.startYear<=year && exp.endYear>=year){
+        const point = timeline.querySelector(`.experience-point[data-index="${index}"]`);
+        const popup = point.querySelector('.popup');
+        popup.classList.add('active');
+        point.querySelector('img').style.transform='scale(1)';
+        timelineContainer.scrollTo({left:(exp.startYear-startYear)*pixelPerYear - 50, behavior:'smooth'});
       }
-      animatePath();
+    });
+  }
+
+  // Optional: bouncing curved connectors (simplified)
+  experiences.forEach((exp,index)=>{
+    if(index>0 && exp.company===experiences[index-1].company){
+      const prev = experiences[index-1];
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const startX = (prev.startYear-startYear)*pixelPerYear + ((prev.endYear-prev.startYear+1)*pixelPerYear)/2;
+      const endX = (exp.startYear-startYear)*pixelPerYear + ((exp.endYear-exp.startYear+1)*pixelPerYear)/2;
+      path.setAttribute('d', `M${startX},60 C${startX+50},0 ${endX-50},0 ${endX},60`);
+      path.setAttribute('stroke','#ffcc00');
+      path.setAttribute('fill','transparent');
+      path.setAttribute('stroke-width','2');
+      connectorsSvg.appendChild(path);
     }
-  }
-}
-drawConnectors();
+  });
 
-// Scroll highlighting for mini overview
-timelineContainer.addEventListener('scroll', () => {
-  const scrollLeft = timelineContainer.scrollLeft;
-  const buttons = yearOverview.querySelectorAll('button');
-  let activeYear = startYear;
-  for(let y = startYear; y <= endYear; y++) {
-    if(yearToLeft(y) - 50 <= scrollLeft) activeYear = y;
-  }
-  buttons.forEach(b => b.classList.remove('active'));
-  buttons[activeYear - startYear].classList.add('active');
-});
-
-// Zoom / pinch to zoom
-let scale = 1;
-timelineContainer.addEventListener('wheel', e => {
-  if(e.ctrlKey) {
-    e.preventDefault();
-    scale += e.deltaY* -0.001;
-    scale = Math.min(Math.max(.5, scale), 3);
-    timelineWrapper.style.transform = `scaleX(${scale})`;
-    yearOverview.style.transform = `scaleX(${scale})`;
-  }
-});
+})();
 </script>
 
 </body>
