@@ -68,20 +68,24 @@
   }
   /* Circle container for the logo */
 .timeline-point {
-  position: relative;          /* needed for absolute positioning of circle + img */
-  padding-top: 72px;          /* leave room for 60px circle + small gap */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin: 0 10px;
+  }
 
-/* Logo inside the circle */
-.timeline-point img {
-  max-width: 70%;
-  max-height: 70%;
-  object-fit: contain; /* keeps original aspect ratio */
-}
+ .timeline-point img {
+    width: 60px;
+    height: 60px;
+    border-radius: 120%;
+    object-fit: contain;
+    padding: 5px;
+    transition: transform 0.2s;
+  }
     .timeline-year {
     font-size: 12px;
     color: #aaa;
