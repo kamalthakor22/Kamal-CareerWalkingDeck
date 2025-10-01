@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Dark Timeline with Legend</title>
+<title>Interactive Animated Timeline</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -17,10 +17,10 @@
     color: #1e90ff;
   }
 
-  /* Legend */
   .legend {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 20px;
     gap: 20px;
   }
@@ -44,10 +44,10 @@
     position: relative;
     width: 100%;
     overflow-x: auto;
-    padding: 80px 0 20px 0;
+    padding: 80px 0 40px 0;
     border-bottom: 3px solid #1e90ff;
     white-space: nowrap;
-    height: 250px;
+    height: auto;
     background: #1c1c1c;
     scroll-behavior: smooth;
   }
@@ -59,26 +59,22 @@
     color: #aaa;
   }
 
+  .duration-bar, .timeline-point {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.6s ease-out;
+  }
+
+  .duration-bar.visible, .timeline-point.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .duration-bar {
     position: absolute;
     height: 20px;
     border-radius: 10px;
     cursor: pointer;
-  }
-
-  .duration-bar:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e90ff;
-    color: #fff;
-    padding: 3px 8px;
-    font-size: 12px;
-    border-radius: 4px;
-    white-space: nowrap;
-    z-index: 10;
   }
 
   .timeline-point {
@@ -110,7 +106,7 @@
     color: #e0e0e0;
   }
 
-  .timeline-point:hover::after {
+  .timeline-point::after {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 70px;
@@ -122,52 +118,79 @@
     font-size: 12px;
     border-radius: 4px;
     white-space: nowrap;
+    display: none;
     z-index: 10;
   }
 
-  .details-container {
-    margin-top: 40px;
+  .timeline-point:hover::after {
+    display: block;
+  }
+
+  .popup {
+    position: absolute;
+    max-width: 300px;
     background: #1c1c1c;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #1e90ff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    z-index: 100;
     color: #e0e0e0;
   }
 
-  .details-container h3 {
-    margin-top: 0;
+  .popup h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
     color: #1e90ff;
   }
 
-  .details-container ul {
+  .popup h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .popup ul {
     padding-left: 20px;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-wrapper {
+      height: 300px;
+      padding-bottom: 80px;
+    }
+
+    .timeline-point img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .popup {
+      max-width: 250px;
+      font-size: 12px;
+    }
   }
 </style>
 </head>
 <body>
 
-<h2>Professional Experience Timeline (2000–2025)</h2>
+<h2>Professional Experience Timeline (2005–2025)</h2>
 
 <div class="legend">
   <div class="legend-item"><span class="legend-color" style="background:#32cd32"></span> Implementation</div>
   <div class="legend-item"><span class="legend-color" style="background:#1e90ff"></span> Architect</div>
-  <div class="legend-item"><span class="legend-color" style="background:#ff8c00"></span> Founder</div>
+  <div class="legend-item"><span class="legend-color" style="background:#ff8c00"></span> Founder & Principal Consultant</div>
 </div>
 
 <div class="timeline-wrapper" id="timelineWrapper"></div>
 
-<div class="details-container" id="details">
-  <h3>Click a timeline point to see details</h3>
-  <p>Select a company logo above to view your role, dates, and responsibilities.</p>
-</div>
-
 <script>
 const timelineWrapper = document.getElementById('timelineWrapper');
-const details = document.getElementById('details');
 
-const startYear = 2000;
+const startYear = 2005;
 const endYear = 2025;
-const timelineWidth = 2000; // px
+const timelineWidth = 2000;
 timelineWrapper.style.width = timelineWidth + "px";
 
 // Role colors
@@ -188,54 +211,77 @@ for (let y = startYear; y <= endYear; y++) {
 
 // Experiences
 const experiences = [
-  { title: "Technical Consultant / Implementation Specialist", company: "EMC Thailand", startYear: 2006, endYear: 2007, roleType: "Implementation", logo: "emc-thailand-logo.png", details: `<ul><li>Provided technical consultancy and delivered solutions across APJ region.</li><li>Implemented NetWorker at multiple organizations.</li><li>Implemented DiskXtender for UNIX/Linux.</li><li>Developed Java code for file permissions before archiving.</li></ul>` },
-  { title: "Implementation Delivery Specialist", company: "EMC India", startYear: 2007, endYear: 2010, roleType: "Implementation", logo: "emc-india-logo.png", details: `<ul><li>Deployed backup & recovery solutions in South Asia.</li><li>Implemented NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase, EmailXtender, DiskExtender.</li></ul>` },
-  { title: "Senior Implementation Delivery Specialist", company: "EMC Middle East", startYear: 2010, endYear: 2013, roleType: "Implementation", logo: "emc-logo.png", details: `<ul><li>Implemented backup & recovery systems in GCC region.</li><li>Managed delivery, resolved issues, and recommended solutions.</li></ul>` },
-  { title: "Senior Advisor / Senior Solutions Architect", company: "Dell EMC Middle East", startYear: 2013, endYear: 2018, roleType: "Architect", logo: "dell-emc-logo.png", details: `<ul><li>Delivered tailored data protection solutions integrating AI.</li><li>Conducted POCs, mentored colleagues, improved operational efficiency.</li><li>Awarded Solution Architect of the Year 2014.</li><li>Migrated applications to GCP, reducing costs by 30%.</li></ul>` },
-  { title: "Consultant Solutions Architect", company: "Dell Technologies", startYear: 2018, endYear: 2024, roleType: "Architect", logo: "dell-logo.png", details: `<ul><li>Engaged clients for hybrid cloud integration and compliance.</li><li>Led pre-sales workshops and solution demos.</li><li>Integrated Generative AI for automation, threat detection, and predictive analytics.</li><li>Implemented Veeam with Data Domain backend for secure retention.</li></ul>` },
-  { title: "Founder & Principal Consultant", company: "Vivanka Inc.", startYear: 2024, endYear: 2025, roleType: "Founder", logo: "vivanka-logo.png", details: `<ul><li>Consulting for Canadian enterprises on modernizing backup and cyber recovery.</li><li>Led migration of legacy NetWorker environment.</li><li>Designed PPDM with Data Domain and cloud tier.</li><li>Delivered architecture sessions and workshops.</li></ul>` }
+  { title: "Technical Consultant / Implementation Specialist", company: "EMC Thailand", startYear: 2006, endYear: 2007, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Provided technical consultancy and delivered solutions across APJ region.</li><li>Implemented NetWorker at multiple organizations.</li></ul>` },
+  { title: "Implementation Delivery Specialist", company: "EMC India", startYear: 2007, endYear: 2010, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Deployed backup & recovery solutions in South Asia.</li></ul>` },
+  { title: "Senior Implementation Delivery Specialist", company: "EMC Middle East", startYear: 2010, endYear: 2013, roleType: "Implementation", logo: "images/emc-logo.png", details: `<ul><li>Implemented backup & recovery systems in GCC region.</li></ul>` },
+  { title: "Senior Advisor / Senior Solutions Architect", company: "Dell EMC Middle East", startYear: 2013, endYear: 2018, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Delivered tailored data protection solutions integrating AI.</li></ul>` },
+  { title: "Consultant Solutions Architect", company: "Dell Technologies", startYear: 2018, endYear: 2024, roleType: "Architect", logo: "images/dell-logo.png", details: `<ul><li>Engaged clients for hybrid cloud integration and compliance.</li></ul>` },
+  { title: "Founder & Principal Consultant", company: "Vivanka Inc.", startYear: 2024, endYear: 2025, roleType: "Founder", logo: "images/vivanka-logo.png", details: `<ul><li>Consulting for Canadian enterprises on modernizing backup and cyber recovery.</li></ul>` }
 ];
 
-// Stack positions for overlapping roles
 const verticalOffsets = {};
 function getVerticalOffset(company) {
   verticalOffsets[company] = (verticalOffsets[company] || 0) + 1;
   return verticalOffsets[company] * 70;
 }
 
-// Add bars and points with color coding
 experiences.forEach(exp => {
   const left = ((exp.startYear - startYear) / (endYear - startYear)) * timelineWidth;
   const right = ((exp.endYear - startYear) / (endYear - startYear)) * timelineWidth;
   const width = right - left;
   const topOffset = getVerticalOffset(exp.company);
-
   const color = roleColors[exp.roleType] || "#1e90ff";
 
-  // Duration bar
   const bar = document.createElement('div');
   bar.className = 'duration-bar';
   bar.style.left = left + 'px';
   bar.style.width = width + 'px';
   bar.style.top = topOffset + 'px';
-  bar.style.backgroundColor = color + "88"; // semi-transparent
+  bar.style.backgroundColor = color + "88"; 
   bar.setAttribute('data-tooltip', `${exp.roleType}: ${exp.startYear} – ${exp.endYear}`);
   timelineWrapper.appendChild(bar);
 
-  // Timeline point
   const point = document.createElement('div');
   point.className = 'timeline-point';
   point.style.left = left + 'px';
   point.style.top = (topOffset - 40) + 'px';
   point.setAttribute('data-tooltip', `${exp.roleType}: ${exp.startYear} – ${exp.endYear}`);
   point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo" style="border-color:${color}"><span>${exp.company}</span>`;
-  point.addEventListener('click', () => {
-    details.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company} | ${exp.startYear} – ${exp.endYear}</h4>${exp.details}`;
-    point.scrollIntoView({behavior: 'smooth', inline: 'center'});
-  });
   timelineWrapper.appendChild(point);
+
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.style.display = 'none';
+  popup.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company} | ${exp.startYear} – ${exp.endYear}</h4>${exp.details}`;
+  document.body.appendChild(popup);
+
+  point.addEventListener('click', () => {
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    const rect = point.getBoundingClientRect();
+    popup.style.left = rect.left + window.scrollX + 'px';
+    popup.style.top = rect.top + window.scrollY - popup.offsetHeight - 10 + 'px';
+    popup.scrollIntoView({behavior: 'smooth', block: 'center'});
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!point.contains(e.target) && !popup.contains(e.target)) {
+      popup.style.display = 'none';
+    }
+  });
+
+  // Animate on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(bar);
+  observer.observe(point);
 });
 </script>
-
 </body>
 </html>
