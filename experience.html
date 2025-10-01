@@ -3,149 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Experience Timeline</title>
+<title>Proportional Horizontal Timeline with Details</title>
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    margin: 0;
     padding: 20px;
+    background: #f5f5f5;
   }
-  .timeline {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .timeline::after {
-    content: '';
-    position: absolute;
-    left: 50px;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: #0073e6;
-  }
-  .timeline-item {
-    position: relative;
-    margin: 20px 0;
-    padding-left: 100px;
-  }
-  .timeline-item .logo {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 60px;
-    height: 60px;
-    background: #ddd;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-size: 12px;
+
+  h2 {
     text-align: center;
-  }
-  .timeline-item .content {
-    background: #fff;
-    padding: 15px 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  .timeline-item h3 {
-    margin: 0 0 5px 0;
-    font-size: 18px;
     color: #0073e6;
   }
-  .timeline-item h4 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
+
+  .timeline-wrapper {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    padding: 60px 0 20px 0;
+    border-bottom: 3px solid #0073e6;
+    white-space: nowrap;
+    height: 150px;
+  }
+
+  .timeline-year {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    font-size: 12px;
     color: #333;
+    position: absolute;
+    top: 100px;
   }
-  .timeline-item p {
-    margin: 5px 0;
-    font-size: 14px;
-    line-height: 1.5;
+
+  .timeline-point {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
   }
-  .timeline-item ul {
-    margin: 5px 0;
+
+  .timeline-point img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid #0073e6;
+    margin-bottom: 5px;
+    transition: transform 0.2s;
+  }
+
+  .timeline-point:hover img {
+    transform: scale(1.2);
+  }
+
+  .timeline-point span {
+    display: block;
+    font-size: 12px;
+    color: #333;
+    max-width: 100px;
+  }
+
+  .details-container {
+    margin-top: 60px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .details-container h3 {
+    margin-top: 0;
+    color: #0073e6;
+  }
+
+  .details-container ul {
     padding-left: 20px;
   }
+
 </style>
 </head>
 <body>
 
-<div class="timeline">
+<h2>Professional Experience Timeline (2000–2025)</h2>
 
-  <div class="timeline-item">
-    <div class="logo">Vivanka<br>Logo</div>
-    <div class="content">
-      <h3>Founder & Principal Consultant</h3>
-      <h4>Vivanka Inc., Toronto, Canada | Apr 2024 – Present</h4>
-      <p>Provided consulting services to Canadian enterprises on modernizing backup and cyber recovery strategies, delivering architecture, migration, and implementation services.</p>
-      <ul>
-        <li>Led a 6-month migration of legacy NetWorker environment, improving recovery SLAs.</li>
-        <li>Designed and deployed PowerProtect Data Manager with cloud tiering for cost-optimized retention.</li>
-        <li>Delivered architecture design sessions and workshops, influencing Dell Technologies adoption.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="logo">Dell<br>Logo</div>
-    <div class="content">
-      <h3>Consultant Solutions Architect</h3>
-      <h4>Dell Technologies, Toronto, Canada | Oct 2018 – Apr 2024</h4>
-      <p>Specialized in data protection systems, providing technical expertise in Dell backup and recovery products and hybrid cloud integration.</p>
-      <ul>
-        <li>Guided clients through data protection and cyber recovery strategies.</li>
-        <li>Led pre-sales engagements and influenced adoption of Dell solutions.</li>
-        <li>Integrated Generative AI for automation, threat detection, and predictive analytics.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="logo">Dell EMC<br>Logo</div>
-    <div class="content">
-      <h3>Senior Advisor / Senior Solutions Architect</h3>
-      <h4>Dell EMC Middle East, Dubai, UAE | Jul 2013 – Oct 2018</h4>
-      <p>Delivered tailored data protection solutions and integrated AI-focused initiatives to enhance automation and predictive analytics.</p>
-      <ul>
-        <li>Designed and implemented backup and recovery solutions for GCC enterprises.</li>
-        <li>Led AI-focused training programs and proof-of-concept initiatives.</li>
-        <li>Awarded Solution Architect of the Year 2014 for Gulf and Pakistan.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="logo">EMC<br>Logo</div>
-    <div class="content">
-      <h3>Senior Implementation Delivery Specialist</h3>
-      <h4>EMC Middle East, Dubai, UAE | Oct 2010 – Jul 2013</h4>
-      <p>Provided complex software implementations and ensured high customer satisfaction across backup and recovery solutions in the GCC region.</p>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="logo">EMC India<br>Logo</div>
-    <div class="content">
-      <h3>Implementation Delivery Specialist</h3>
-      <h4>EMC Data Storage India Pvt. Ltd., New Delhi, India | Oct 2007 – Oct 2010</h4>
-      <p>Deployed backup and recovery solutions across South Asia, implementing EMC products such as NetWorker, Data Domain, Avamar, and DiskExtender.</p>
-    </div>
-  </div>
-
-  <div class="timeline-item">
-    <div class="logo">EMC Thailand<br>Logo</div>
-    <div class="content">
-      <h3>Technical Consultant / Implementation Specialist</h3>
-      <h4>EMC Thailand, Bangkok, Thailand | Sept 2006 – Oct 2007</h4>
-      <p>Delivered technical consultancy and implemented backup solutions across APJ region, including NetWorker and DiskXtender deployments.</p>
-    </div>
-  </div>
-
+<div class="timeline-wrapper" id="timelineWrapper">
+  <!-- Year labels will be added dynamically -->
 </div>
+
+<div class="details-container" id="details">
+  <h3>Click a timeline point to see details</h3>
+  <p>Select a company logo above to view your role, dates, and responsibilities.</p>
+</div>
+
+<script>
+  const timelineWrapper = document.getElementById('timelineWrapper');
+  const details = document.getElementById('details');
+
+  const startYear = 2000;
+  const endYear = 2025;
+  const timelineWidth = 2000; // total width in pixels
+
+  // Generate year labels
+  for (let y = startYear; y <= endYear; y++) {
+    const yearDiv = document.createElement('div');
+    yearDiv.className = 'timeline-year';
+    yearDiv.style.left = ((y - startYear) / (endYear - startYear)) * timelineWidth - 15 + 'px';
+    yearDiv.innerText = y;
+    timelineWrapper.appendChild(yearDiv);
+  }
+
+  // Timeline experiences
+  const experiences = [
+    {
+      title: "Technical Consultant / Implementation Specialist",
+      company: "EMC Thailand",
+      dates: "Sept 2006 – Oct 2007",
+      logo: "emc-thailand-logo.png",
+      startYear: 2006,
+      details: `<ul>
+        <li>Provided technical consultancy and delivered information protection solutions across APJ region.</li>
+        <li>Implemented NetWorker at PTT Thai Oil, Ministry of External Affairs, DTAC, True Move, Siam Pharmaceuticals, Mitsubishi Motors Ltd.</li>
+        <li>Implemented DiskXtender for UNIX/Linux at BAAC.</li>
+        <li>Developed Java code for file permissions before archiving using DiskXtender for a customer in Malaysia.</li>
+      </ul>`
+    },
+    {
+      title: "Implementation Delivery Specialist",
+      company: "EMC India",
+      dates: "Oct 2007 – Oct 2010",
+      logo: "emc-india-logo.png",
+      startYear: 2007,
+      details: `<ul>
+        <li>Deployed backup and recovery solutions for South Asia customers.</li>
+        <li>Implemented EMC products including NetWorker, Data Domain, Avamar, Data Protection Advisor, Homebase (BMR), EmailXtender (SourceOne), DiskExtender.</li>
+      </ul>`
+    },
+    {
+      title: "Senior Implementation Delivery Specialist",
+      company: "EMC Middle East",
+      dates: "Oct 2010 – Jul 2013",
+      logo: "emc-logo.png",
+      startYear: 2010,
+      details: `<ul>
+        <li>Implemented backup & recovery systems in GCC, ensured high customer satisfaction.</li>
+        <li>Collaborated with global EMC colleagues to resolve technical issues.</li>
+        <li>Identified client needs, assessed risks, and recommended appropriate solutions.</li>
+      </ul>`
+    },
+    {
+      title: "Senior Advisor / Senior Solutions Architect",
+      company: "Dell EMC Middle East",
+      dates: "Jul 2013 – Oct 2018",
+      logo: "dell-emc-logo.png",
+      startYear: 2013,
+      details: `<ul>
+        <li>Delivered tailored data protection solutions covering EMC and third-party products.</li>
+        <li>Integrated AI-focused initiatives for automation, predictive analytics, and threat detection.</li>
+        <li>Conducted POCs, mentored colleagues, and enhanced client operational efficiency.</li>
+        <li>Awarded Solution Architect of the Year (Gulf & Pakistan, 2014).</li>
+        <li>Led migration of applications to Google Cloud Platform, reducing operational costs by 30%.</li>
+      </ul>`
+    },
+    {
+      title: "Consultant Solutions Architect",
+      company: "Dell Technologies",
+      dates: "Oct 2018 – Apr 2024",
+      logo: "dell-logo.png",
+      startYear: 2018,
+      details: `<ul>
+        <li>Engaged clients for customized data protection solutions, hybrid cloud integration, and compliance frameworks.</li>
+        <li>Led pre-sales workshops and solution demos, improving adoption rates.</li>
+        <li>Integrated Generative AI solutions for automation, threat detection, and predictive analytics.</li>
+        <li>Designed and implemented Veeam with Data Domain backend for secure long-term retention.</li>
+        <li>Evangelized Dell solutions through webinars and industry events.</li>
+      </ul>`
+    },
+    {
+      title: "Founder & Principal Consultant",
+      company: "Vivanka Inc.",
+      dates: "Apr 2024 – Present",
+      logo: "vivanka-logo.png",
+      startYear: 2024,
+      details: `<ul>
+        <li>Consulting for Canadian enterprises on modernizing backup and cyber recovery strategies.</li>
+        <li>Led a 6-month engagement migrating legacy NetWorker environment, improving recovery SLAs.</li>
+        <li>Designed PPDM with Data Domain and cloud tier for cost-optimized long-term retention.</li>
+        <li>Executed multiple PPDM + Data Domain projects, integrating Azure cloud tier.</li>
+        <li>Delivered architecture sessions, workshops, and influenced Dell Technologies adoption.</li>
+      </ul>`
+    }
+  ];
+
+  // Add timeline points
+  experiences.forEach(exp => {
+    const point = document.createElement('div');
+    point.className = 'timeline-point';
+    point.style.left = ((exp.startYear - startYear) / (endYear - startYear)) * timelineWidth + 'px';
+    point.innerHTML = `
+      <img src="${exp.logo}" alt="${exp.company} Logo">
+      <span>${exp.company}</span>
+    `;
+    point.addEventListener('click', () => {
+      details.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company} | ${exp.dates}</h4>${exp.details}`;
+    });
+    timelineWrapper.appendChild(point);
+  });
+</script>
 
 </body>
 </html>
