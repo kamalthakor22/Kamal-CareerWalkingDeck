@@ -215,7 +215,6 @@ const yearOverview = document.getElementById('yearOverview');
 
 const startYear = 2005;
 const endYear = 2025;
-
 const roleColors = { "Founder": "#ff8c00", "Architect": "#1e90ff", "Implementation": "#32cd32" };
 
 const experiences = [
@@ -232,7 +231,7 @@ function yearToLeft(year) {
   return ((year - startYear) / (endYear - startYear)) * (containerWidth - 100) + 50;
 }
 
-// Year overview buttons
+// Mini overview buttons
 for (let y = startYear; y <= endYear; y++) {
   const btn = document.createElement('button');
   btn.innerText = y;
@@ -251,7 +250,7 @@ for (let y = startYear; y <= endYear; y++) {
   timelineWrapper.appendChild(yearDiv);
 }
 
-// Vertical offsets
+// Vertical offsets for overlapping roles
 const verticalOffsets = {};
 function getVerticalOffset(company) {
   verticalOffsets[company] = (verticalOffsets[company] || 0) + 1;
@@ -260,6 +259,7 @@ function getVerticalOffset(company) {
 
 // Store points for connectors
 const companyPoints = {};
+
 experiences.forEach(exp => {
   const left = yearToLeft(exp.startYear);
   const right = yearToLeft(exp.endYear);
@@ -267,7 +267,7 @@ experiences.forEach(exp => {
   const topOffset = getVerticalOffset(exp.company);
   const color = roleColors[exp.roleType] || "#1e90ff";
 
-  // Bar
+  // Duration bar
   const bar = document.createElement('div');
   bar.className = 'duration-bar';
   bar.style.left = left + 'px';
@@ -281,15 +281,4 @@ experiences.forEach(exp => {
   point.className = 'timeline-point';
   point.style.left = left + 'px';
   point.style.top = (topOffset - 40) + 'px';
-  point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo" style="border-color:${color}"><span>${exp.company}</span>`;
-  timelineWrapper.appendChild(point);
-
-  // Popup
-  const popup = document.createElement('div');
-  popup.className = 'popup';
-  popup.style.display = 'none';
-  popup.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company} | ${exp.startYear} – ${exp.endYear}</h4>${exp.details}`;
-  document.body.appendChild(popup);
-
-  point.addEventListener('click', () => {
-    const allPoints = document.querySelector
+  point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo"
