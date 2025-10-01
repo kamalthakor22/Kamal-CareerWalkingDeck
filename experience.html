@@ -192,7 +192,7 @@ svg.connectors {
 </head>
 <body>
 
-<h2>Professional Experience Timeline (2005–2025) - updated</h2>
+<h2>Professional Experience Timeline (2005–2025)-latest</h2>
 
 <div class="legend">
   <div class="legend-item"><span class="legend-color" style="background:#32cd32"></span> Implementation</div>
@@ -281,4 +281,90 @@ experiences.forEach(exp => {
   point.className = 'timeline-point';
   point.style.left = left + 'px';
   point.style.top = (topOffset - 40) + 'px';
-  point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo"
+  point.innerHTML = `<img src="${exp.logo}" alt="${exp.company} Logo" /><span>${exp.company}</span>`;
+  point.dataset.tooltip = exp.startYear + " – " + exp.endYear;
+  timelineWrapper.appendChild(point);
+
+  setTimeout(()=> {
+    bar.classList.add('visible');
+    point.classList.add('visible');
+  }, 100);
+
+  // Popup
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.style.display = 'none';
+  popup.innerHTML = `<h3>${exp.title}</h3><h4>${exp.company}</h4>${exp.details}`;
+  document.body.appendChild(popup);
+
+  point.addEventListener('click', () => {
+    document.querySelectorAll('.popup').forEach(p=>p.style.display='none');
+    popup.style.display = 'block';
+    const rect = point.getBoundingClientRect();
+    popup.style.left = rect.left + rect.width/2 - popup.offsetWidth/2 + 'px';
+    popup.style.top = rect.top - popup.offsetHeight - 10 + 'px';
+
+    // Shrink other bars
+    document.querySelectorAll('.duration-bar').forEach(b => {
+      if(b !== bar) b.style.transform = 'scaleY(0.5)';
+      else b.style.transform = 'scaleY(1)';
+    });
+  });
+
+  if(!companyPoints[exp.company]) companyPoints[exp.company] = [];
+  companyPoints[exp.company].push({x: left+30, y: topOffset+10});
+});
+
+// Connectors with bounce effect
+function drawConnectors() {
+  connectorSvg.innerHTML = '';
+  for(const company in companyPoints) {
+    const points = companyPoints[company];
+    for(let i=0; i<points.length-1; i++) {
+      const p1 = points[i];
+      const p2 = points[i+1];
+      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+      path.setAttribute("stroke","#888");
+      path.setAttribute("stroke-width","2");
+      path.setAttribute("fill","none");
+      connectorSvg.appendChild(path);
+
+      function animatePath() {
+        const scrollOffset = timelineContainer.scrollLeft;
+        const bounce = Math.sin((scrollOffset + i*50) * 0.01) * 10;
+        path.setAttribute("d", `M${p1.x},${p1.y + bounce} C${p1.x+50},${p1.y + bounce} ${p2.x-50},${p2.y + bounce} ${p2.x},${p2.y + bounce}`);
+        requestAnimationFrame(animatePath);
+      }
+      animatePath();
+    }
+  }
+}
+drawConnectors();
+
+// Scroll highlighting for mini overview
+timelineContainer.addEventListener('scroll', () => {
+  const scrollLeft = timelineContainer.scrollLeft;
+  const buttons = yearOverview.querySelectorAll('button');
+  let activeYear = startYear;
+  for(let y = startYear; y <= endYear; y++) {
+    if(yearToLeft(y) - 50 <= scrollLeft) activeYear = y;
+  }
+  buttons.forEach(b => b.classList.remove('active'));
+  buttons[activeYear - startYear].classList.add('active');
+});
+
+// Zoom / pinch to zoom
+let scale = 1;
+timelineContainer.addEventListener('wheel', e => {
+  if(e.ctrlKey) {
+    e.preventDefault();
+    scale += e.deltaY* -0.001;
+    scale = Math.min(Math.max(.5, scale), 3);
+    timelineWrapper.style.transform = `scaleX(${scale})`;
+    yearOverview.style.transform = `scaleX(${scale})`;
+  }
+});
+</script>
+
+</body>
+</html>
