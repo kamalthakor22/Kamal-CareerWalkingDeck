@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <!-- Tailwind (CDN) for zero-build deployment; fine for GitHub Pages -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <script>
     // Basic Tailwind config
     tailwind.config = {
@@ -202,7 +203,7 @@
       <div class="ml-auto flex items-center gap-2">
         <a href="https://www.linkedin.com/in/kamal-thakor/" target="_blank" rel="noreferrer" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow"><i class="fab fa-linkedin fa-2x"></i></a>
         <a href="mailto:kamalt@rocketmail.com" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow"><i class="fas fa-envelope fa-2x"></i></a>
-        <button id="dm" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow" aria-label="Toggle dark mode">☀️ Light</button>
+        <button id="dm" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow" aria-label="Toggle dark mode">☀️Light</button>
       </div>
     </div>
   </header>
@@ -786,7 +787,7 @@
   <script>
     // Dark mode toggle
     const dm = document.getElementById('dm');
-    const updateDMLabel = () => { dm.textContent = document.documentElement.classList.contains('dark') ? '☀️ Light' : '🌙 Dark'; };
+    const updateDMLabel = () => { dm.textContent = document.documentElement.classList.contains('dark') ? '☀️Light' : '🌙Dark'; };
     dm.addEventListener('click', () => { document.documentElement.classList.toggle('dark'); updateDMLabel(); localStorage.setItem('ms-dark', document.documentElement.classList.contains('dark') ? '1' : '0');});
     const saved = localStorage.getItem('ms-dark');
     if (saved === '0') { document.documentElement.classList.remove('dark'); }
