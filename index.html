@@ -200,9 +200,9 @@
         <a href="#contact" class="px-3 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
       </nav>
       <div class="ml-auto flex items-center gap-2">
-        <a href="https://www.linkedin.com/in/kamal-thakor/" target="_blank" rel="noreferrer" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow">LinkedIn</a>
-        <a href="mailto:kamalt@rocketmail.com" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow">Email</a>
-        <button id="dm" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow" aria-label="Toggle dark mode">Light</button>
+        <a href="https://www.linkedin.com/in/kamal-thakor/" target="_blank" rel="noreferrer" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow"><i class="fab fa-linkedin fa-2x">LinkedIn</i></a>
+        <a href="mailto:kamalt@rocketmail.com" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow"><i class="fas fa-envelope fa-2x">kamalt@rocketmail.com</i></a>
+        <button id="dm" class="text-sm px-3 py-1.5 rounded-xl border border-slate-300/70 dark:border-slate-700/70 hover:shadow" aria-label="Toggle dark mode">☀️ Light</button>
       </div>
     </div>
   </header>
@@ -640,10 +640,16 @@
 <p>hashtag#OpenToWork hashtag#SolutionsArchitect hashtag#DataProtection hashtag#Cloud hashtag#BackupRecovery hashtag#Hiring hashtag#Compliance hashtag#Resilience</p>
         </div>
         <div class="flex gap-3">
-          <a href="mailto:kamalt@rocketmail.com" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">Email</a>
-          <a href="https://www.linkedin.com/in/kamal-thakor" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-2xl border border-slate-300/70 dark:border-slate-700/70">LinkedIn</a>
+          <a href="mailto:kamalt@rocketmail.com" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900"><i class="fas fa-envelope fa-2x">📩 kamalt@rocketmail.com</i></a>
+          <a href="#" class="px-4 py-2 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900"><i class="fas fa-phone fa-2x">📱 +1 (289) 830-8942</i></a>
+          <a href="https://www.linkedin.com/in/kamal-thakor" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-2xl border border-slate-300/70 dark:border-slate-700/70"><i class="fab fa-linkedin fa-2x">LinkedIn</i></a>
         </div>
       </div>
+    </div>
+    <div class="mt-3 flex flex-wrap gap-2 text-xs">
+      <a href="Resume - Kamal Thakor - Aug2025.pdf" download="Resume - Kamal Thakor - Aug2025.pdf" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70"><span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Resume for Practice Lead / Managerial Positions</span></a>
+      <a href="Resume - Kamal Thakor - Aug2025.pdf" download="Resume - Kamal Thakor - Aug2025.pdf" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70"><span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Resume for Architect Positions</span></a>
+      <a href="Resume - Kamal Thakor - Aug2025.pdf" download="Resume - Kamal Thakor - Aug2025.pdf" class="px-5 py-2.5 rounded-2xl border border-slate-300/70 dark:border-slate-700/70"><span class="px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border">Resume for Pre-Sales Positions</span></a>
     </div>
   </section>
 <!-- Ideas & Innovation -->
@@ -779,7 +785,7 @@
   <script>
     // Dark mode toggle
     const dm = document.getElementById('dm');
-    const updateDMLabel = () => { dm.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark'; };
+    const updateDMLabel = () => { dm.textContent = document.documentElement.classList.contains('dark') ? '☀️ Light' : '🌙 Dark'; };
     dm.addEventListener('click', () => { document.documentElement.classList.toggle('dark'); updateDMLabel(); localStorage.setItem('ms-dark', document.documentElement.classList.contains('dark') ? '1' : '0');});
     const saved = localStorage.getItem('ms-dark');
     if (saved === '0') { document.documentElement.classList.remove('dark'); }
